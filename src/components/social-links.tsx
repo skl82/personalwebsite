@@ -18,15 +18,18 @@ const links = [
 
 export function SocialLinks({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      {links.map(({ key, href, label, Icon }) => (
+    <div className={cn("flex items-center", className)}>
+      {links.map(({ key, href, label, Icon }, i) => (
         <a
           key={key}
           href={href}
           target={href.startsWith("http") ? "_blank" : undefined}
           rel="noopener noreferrer"
           aria-label={label}
-          className="flex h-10 w-10 items-center justify-center rounded-xl text-muted ring-1 ring-border transition-all hover:-translate-y-0.5 hover:text-fg hover:ring-accent/60"
+          className={cn(
+            "flex h-10 w-10 items-center justify-center border border-border text-muted transition-colors hover:bg-panel hover:text-accent",
+            i > 0 && "-ml-px", // collapse borders into a single rule
+          )}
         >
           <Icon className="h-[18px] w-[18px]" />
         </a>

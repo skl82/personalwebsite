@@ -14,13 +14,11 @@ export function SpotifyEmbed({ url, title }: { url: string; title?: string }) {
 
   if (!embed) {
     return (
-      <div className="flex h-[152px] flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-bg-soft/50 px-4 text-center">
-        <Disc3 className="h-6 w-6 text-muted" />
-        <p className="text-sm text-muted">
+      <div className="flex h-[152px] flex-col items-center justify-center gap-2 border border-dashed border-border bg-bg px-4 text-center">
+        <Disc3 className="h-5 w-5 text-dim" />
+        <p className="font-mono text-[11px] uppercase tracking-wider text-muted">
           Paste a Spotify link in{" "}
-          <code className="rounded bg-surface px-1 py-0.5 font-mono text-xs text-fg">
-            src/lib/music.ts
-          </code>
+          <span className="text-accent">src/lib/music.ts</span>
         </p>
       </div>
     );
@@ -30,7 +28,7 @@ export function SpotifyEmbed({ url, title }: { url: string; title?: string }) {
     <iframe
       src={embed}
       title={title ?? "Spotify player"}
-      className="w-full rounded-2xl"
+      className="w-full"
       height={152}
       style={{ border: 0 }}
       loading="lazy"

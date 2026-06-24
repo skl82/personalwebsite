@@ -2,13 +2,13 @@ import { Hero } from "@/components/hero";
 import { Container } from "@/components/container";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { PostCard } from "@/components/post-card";
+import { PostCard, PostList } from "@/components/post-card";
 import { RecCard } from "@/components/rec-card";
 import { getAllPosts } from "@/lib/posts";
 import { recommendations } from "@/lib/music";
 
 export default function Home() {
-  const posts = getAllPosts().slice(0, 2);
+  const posts = getAllPosts().slice(0, 3);
   const recs = recommendations.slice(0, 3);
 
   return (
@@ -16,35 +16,35 @@ export default function Home() {
       <Hero />
 
       {posts.length > 0 && (
-        <Container className="py-12 sm:py-16">
+        <Container className="py-16 sm:py-20">
           <Reveal>
             <SectionHeading
-              eyebrow="From the notebook"
+              index="01"
               title="Recent writing"
               href="/writing"
               linkLabel="All posts"
             />
           </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {posts.map((post, i) => (
-              <Reveal key={post.slug} className="h-full" delay={i * 0.05}>
-                <PostCard post={post} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <PostList>
+              {posts.map((post, i) => (
+                <PostCard key={post.slug} post={post} index={i} />
+              ))}
+            </PostList>
+          </Reveal>
         </Container>
       )}
 
-      <Container className="py-12 sm:py-16">
+      <Container className="py-16 sm:py-20">
         <Reveal>
           <SectionHeading
-            eyebrow="On repeat"
+            index="02"
             title="What I'm into"
             href="/music"
             linkLabel="All music"
           />
         </Reveal>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {recs.map((rec, i) => (
             <Reveal key={rec.title} className="h-full" delay={i * 0.05}>
               <RecCard rec={rec} />

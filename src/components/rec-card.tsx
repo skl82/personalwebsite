@@ -1,15 +1,11 @@
-import { Disc3, Music } from "lucide-react";
 import { SpotifyIcon, YoutubeIcon } from "@/components/icons";
 import type { Rec } from "@/lib/music";
 
 export function RecCard({ rec }: { rec: Rec }) {
-  const KindIcon = rec.kind === "album" ? Disc3 : Music;
-
   return (
-    <div className="card lift flex flex-col gap-3 rounded-2xl p-5">
+    <div className="card lift flex h-full flex-col gap-4 p-5">
       <div className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-soft px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-muted ring-1 ring-border">
-          <KindIcon className="h-3.5 w-3.5" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
           {rec.kind}
         </span>
         <div className="flex items-center gap-2.5">
@@ -19,7 +15,7 @@ export function RecCard({ rec }: { rec: Rec }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open ${rec.title} in Spotify`}
-              className="text-muted transition-colors hover:text-fg"
+              className="text-dim transition-colors hover:text-accent"
             >
               <SpotifyIcon className="h-[18px] w-[18px]" />
             </a>
@@ -30,7 +26,7 @@ export function RecCard({ rec }: { rec: Rec }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Find ${rec.title} on YouTube`}
-              className="text-muted transition-colors hover:text-fg"
+              className="text-dim transition-colors hover:text-accent"
             >
               <YoutubeIcon className="h-[18px] w-[18px]" />
             </a>
@@ -38,15 +34,15 @@ export function RecCard({ rec }: { rec: Rec }) {
         </div>
       </div>
 
-      <div>
-        <h3 className="font-display text-lg font-semibold leading-tight">
+      <div className="mt-auto">
+        <h3 className="font-display text-2xl uppercase leading-none tracking-tight">
           {rec.title}
         </h3>
-        <p className="text-sm text-muted">{rec.artist}</p>
+        <p className="mt-1.5 font-mono text-xs text-muted">{rec.artist}</p>
       </div>
 
       {rec.note && (
-        <p className="text-sm leading-relaxed text-muted/90">{rec.note}</p>
+        <p className="text-sm leading-relaxed text-muted">{rec.note}</p>
       )}
     </div>
   );

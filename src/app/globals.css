@@ -1,23 +1,29 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ── Design tokens ──────────────────────────────────────────────────────── */
+/* ── Design tokens — flat / mono / terminal, after araujiaband.com ─────────── */
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-bebas), var(--font-inter), sans-serif;
 
-  --color-bg: #08080d;
-  --color-bg-soft: #0e0e17;
-  --color-surface: #14141f;
-  --color-fg: #f1f1f6;
-  --color-muted: #9a9ab2;
-  --color-border: #232336;
+  --color-bg: #0a0a0a;
+  --color-panel: #101010;
+  --color-surface: #161616; /* alias kept for any stragglers */
+  --color-bg-soft: #0e0e0e; /* alias kept for any stragglers */
+  --color-fg: #f1f1f1;
+  --color-muted: #8a8a8a;
+  --color-dim: #5a5a5a;
+  --color-border: #262626;
+  --color-accent: #e63946;
 
-  --color-accent: #a855f7; /* violet */
-  --color-accent-2: #ec4899; /* pink */
-  --color-accent-3: #fb923c; /* orange */
-  --color-cyan: #22d3ee;
+  /* Everything stays sharp. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
@@ -36,95 +42,63 @@
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
-    color: #fff;
+    background-color: var(--color-accent);
+    color: #0a0a0a;
   }
 }
 
-/* ── Reusable effects ───────────────────────────────────────────────────── */
+/* ── Utilities ──────────────────────────────────────────────────────────── */
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
   }
 
-  /* Signature gradient, clipped to text. */
-  .gradient-text {
-    background-image: linear-gradient(
-      110deg,
-      var(--color-accent) 0%,
-      var(--color-accent-2) 48%,
-      var(--color-accent-3) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Monospace "system" label: small, uppercase, wide tracking. */
+  .label {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    line-height: 1.2;
   }
 
-  /* Solid gradient fill — buttons, badges, bars. */
-  .gradient-bg {
-    background-image: linear-gradient(
-      110deg,
-      var(--color-accent),
-      var(--color-accent-2) 55%,
-      var(--color-accent-3)
-    );
-  }
-
-  /* Frosted card surface. */
+  /* Flat bordered block (replaces the old frosted card). */
   .card {
-    background-color: color-mix(in oklab, var(--color-surface) 75%, transparent);
+    background-color: var(--color-panel);
     border: 1px solid var(--color-border);
-    backdrop-filter: blur(10px);
   }
 
-  /* Accent glow used on hover for interactive cards. */
-  .glow {
-    box-shadow:
-      0 0 0 1px color-mix(in oklab, var(--color-accent) 35%, transparent),
-      0 24px 70px -24px color-mix(in oklab, var(--color-accent-2) 60%, transparent);
-  }
-
-  /* Lift + glow on hover. Applied directly (not as a variant) so it works
-     regardless of Tailwind v4 custom-utility variant handling. */
+  /* Interactive flat block: accent border on hover — no lift, no shadow. */
   .lift {
     transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      border-color 0.3s ease;
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      color 0.18s ease;
   }
   .lift:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in oklab, var(--color-accent) 50%, var(--color-border));
-    box-shadow:
-      0 0 0 1px color-mix(in oklab, var(--color-accent) 30%, transparent),
-      0 24px 70px -24px color-mix(in oklab, var(--color-accent-2) 55%, transparent);
+    border-color: var(--color-accent);
+    background-color: #131313;
   }
 
-  /* Animated conic ring used behind the avatar / accents. */
-  .animate-spin-slow {
-    animation: spin 14s linear infinite;
-  }
-  .animate-float {
-    animation: float 16s ease-in-out infinite;
+  /* Blinking terminal cursor. */
+  .cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    background-color: var(--color-accent);
+    vertical-align: -0.15em;
+    animation: blink 1s steps(2) infinite;
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(3%, -4%) scale(1.05);
-  }
-  66% {
-    transform: translate(-3%, 3%) scale(0.97);
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-spin-slow,
-  .animate-float {
+  .cursor {
     animation: none;
   }
   html {

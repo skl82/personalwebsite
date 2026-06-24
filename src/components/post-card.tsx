@@ -1,63 +1,58 @@
 import Link from "next/link";
-import { ArrowUpRight, Calendar, Clock } from "lucide-react";
-import { SubstackIcon } from "@/components/icons";
+import { ArrowUpRight } from "lucide-react";
 import type { PostMeta } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
 
-export function PostCard({ post }: { post: PostMeta }) {
+// Editorial list row. Use inside <PostList>, which draws the top border.
+export function PostCard({
+  post,
+  index = 0,
+}: {
+  post: PostMeta;
+  index?: number;
+}) {
   const external = Boolean(post.substackUrl);
+  const num = String(index + 1).padStart(2, "0");
 
   const inner = (
-    <article className="card lift group flex h-full flex-col rounded-2xl p-6">
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
-        <span className="inline-flex items-center gap-1.5">
-          <Calendar className="h-3.5 w-3.5" />
-          {formatDate(post.date)}
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <Clock className="h-3.5 w-3.5" />
-          {post.readingTime}
-        </span>
-        {external && (
-          <span className="inline-flex items-center gap-1 text-accent">
-            <SubstackIcon className="h-3.5 w-3.5" />
-            Substack
-          </span>
-        )}
-      </div>
+    <>
+      <span className="font-mono text-xs text-accent">{num}</span>
 
-      <h3 className="mt-3 font-display text-xl font-semibold leading-snug transition-colors group-hover:text-accent">
-        {post.title}
-      </h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-        {post.summary}
-      </p>
-
-      <div className="mt-4 flex items-center gap-1.5 text-sm font-medium text-fg">
-        {external ? "Read on Substack" : "Read post"}
-        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </div>
-
-      {post.tags.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-1.5">
+      <div className="min-w-0">
+        <h3 className="truncate text-lg font-medium transition-colors group-hover:text-accent">
+          {post.title}
+        </h3>
+        <p className="mt-1 line-clamp-1 text-sm text-muted">{post.summary}</p>
+        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-dim">
+          <span>{formatDate(post.date)}</span>
+          <span>/</span>
+          <span>{post.readingTime}</span>
+          {external && <span className="text-accent">/ Substack</span>}
           {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-bg-soft px-2 py-0.5 text-[11px] text-muted ring-1 ring-border"
-            >
-              #{tag}
-            </span>
+            <span key={tag}>#{tag}</span>
           ))}
         </div>
-      )}
-    </article>
+      </div>
+
+      <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-dim transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
+    </>
   );
 
+  const cls =
+    "group grid grid-cols-[auto_1fr_auto] items-start gap-4 border-b border-border px-1 py-5 transition-colors hover:bg-panel";
+
   return external ? (
-    <a href={post.substackUrl} target="_blank" rel="noopener noreferrer">
+    <a href={post.substackUrl} target="_blank" rel="noopener noreferrer" className={cls}>
       {inner}
     </a>
   ) : (
-    <Link href={`/writing/${post.slug}`}>{inner}</Link>
+    <Link href={`/writing/${post.slug}`} className={cls}>
+      {inner}
+    </Link>
   );
+}
+
+/** Wraps post rows with a top border so the list reads as a table. */
+export function PostList({ children }: { children: React.ReactNode }) {
+  return <div className="border-t border-border">{children}</div>;
 }

@@ -17,31 +17,31 @@ export default function MusicPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Music"
+        eyebrow="// Music"
         title="Sounds"
         description="The stuff I make, and the stuff on repeat. Half studio, half record collection."
       />
 
       {/* My releases */}
-      <Container className="pb-8">
+      <Container className="py-16 sm:py-20">
         <Reveal>
           <SectionHeading
-            eyebrow="My releases"
+            index="01"
             title="Made by me"
             href={site.socials.spotify || undefined}
-            linkLabel="Spotify profile"
+            linkLabel="Spotify"
           />
         </Reveal>
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {releases.map((release, i) => (
             <Reveal key={release.title} delay={i * 0.05}>
-              <div className="card rounded-2xl p-4">
-                <div className="mb-3 flex items-baseline justify-between">
-                  <h3 className="font-display text-lg font-semibold">
+              <div className="card p-4">
+                <div className="mb-3 flex items-baseline justify-between gap-3">
+                  <h3 className="font-display text-2xl uppercase leading-none tracking-tight">
                     {release.title}
                   </h3>
                   {release.year && (
-                    <span className="font-mono text-xs text-muted">
+                    <span className="font-mono text-xs text-dim">
                       {release.year}
                     </span>
                   )}
@@ -59,11 +59,11 @@ export default function MusicPage() {
       </Container>
 
       {/* Recommendations */}
-      <Container className="py-12 sm:py-16">
+      <Container className="pb-20">
         <Reveal>
-          <SectionHeading eyebrow="Recommendations" title="On heavy rotation" />
+          <SectionHeading index="02" title="On heavy rotation" />
         </Reveal>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {recommendations.map((rec, i) => (
             <Reveal key={rec.title} className="h-full" delay={(i % 3) * 0.05}>
               <RecCard rec={rec} />
