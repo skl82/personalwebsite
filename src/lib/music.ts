@@ -49,11 +49,11 @@ export const releases: Release[] = [
 
 export const recommendations: Rec[] = [
   {
-    title: "Blackstar",
-    artist: "David Bowie",
+    title: "Are You Dead Yet?",
+    artist: "Children of Bodom",
     kind: "album",
     youtubeUrl: "https://www.youtube.com/results?search_query=David+Bowie+Blackstar",
-    note: "A goodbye disguised as a jazz record. Endlessly replayable.",
+    note: "The greatest metal album ever? Maybe. In my world? Certainly.",
   },
   {
     title: "Dreams",
