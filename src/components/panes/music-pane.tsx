@@ -7,7 +7,7 @@ export function MusicPane() {
       {/* Releases */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
-          releases
+          made by me and friends
           <span className="h-px flex-1 bg-line" />
         </h2>
         <div className="space-y-6">

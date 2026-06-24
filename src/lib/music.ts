@@ -28,16 +28,22 @@ export type Rec = {
 
 export const releases: Release[] = [
   {
-    title: "First Single",
-    year: "2026",
-    spotifyUrl: "", // REPLACE — paste your Spotify track/album link here
-    note: "The one that started it. Recorded in a bedroom at 2am.",
+    title: "desire machine - araujia",
+    year: "2025",
+    spotifyUrl: "https://open.spotify.com/album/17uvr925n9F4KgUBsHJIhj?si=qc7E3us7R16SOHnuK2sicQ", // REPLACE — paste your Spotify track/album link here
+    note: "my main band's first EP",
   },
   {
-    title: "Demo / EP Name",
-    year: "2025",
-    spotifyUrl: "", // REPLACE
-    note: "A short collection of things I couldn't stop humming.",
+    title: "(the) hieroglyph - hieroglyph",
+    year: "2026",
+    spotifyUrl: "https://open.spotify.com/album/23tM4H8MKLl3DA9l2dtwy1?si=ZnWlTNWMQSuKO9reRtlEBA", // REPLACE
+    note: "a fun sidequest into power pop",
+  },
+  {
+    title: "n.o.a.t.e - no one and the elses",
+    year: "2026",
+    spotifyUrl: "https://open.spotify.com/album/3akWSmvvGyNq6LdKjXpjfa?si=6divXhhZQMi_5Sa-YTJSnQ", // REPLACE — paste your Spotify track/album link here
+    note: "lead guitar",
   },
 ];
 

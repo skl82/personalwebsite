@@ -6,7 +6,9 @@ function toEmbedUrl(url: string): string | null {
     /open\.spotify\.com\/(?:intl-\w+\/)?(track|album|artist|playlist|episode|show)\/([A-Za-z0-9]+)/,
   );
   if (!match) return null;
-  return `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator`;
+  // theme=0 renders Spotify's dark (black) player instead of the
+  // artwork-tinted default.
+  return `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator&theme=0`;
 }
 
 export function SpotifyEmbed({ url, title }: { url: string; title?: string }) {
