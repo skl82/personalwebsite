@@ -1,57 +1,28 @@
-import { Hero } from "@/components/hero";
-import { Container } from "@/components/container";
-import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
-import { PostCard, PostList } from "@/components/post-card";
-import { RecCard } from "@/components/rec-card";
-import { getAllPosts } from "@/lib/posts";
-import { recommendations } from "@/lib/music";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Shell, type Tab } from "@/components/shell";
+import { MusicPane } from "@/components/panes/music-pane";
+import { WritingPane } from "@/components/panes/writing-pane";
+import { ResumePane } from "@/components/panes/resume-pane";
+import { getPost, getPostSlugs, type Post, type PostMeta } from "@/lib/posts";
 
 export default function Home() {
-  const posts = getAllPosts().slice(0, 3);
-  const recs = recommendations.slice(0, 3);
+  // Load posts (newest first) and pre-render their MDX bodies on the server,
+  // so the client shell can swap them in instantly without a route change.
+  const full: Post[] = getPostSlugs()
+    .map((slug) => getPost(slug))
+    .filter((p): p is Post => p !== null)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return (
-    <>
-      <Hero />
-
-      {posts.length > 0 && (
-        <Container className="py-16 sm:py-20">
-          <Reveal>
-            <SectionHeading
-              index="01"
-              title="Recent writing"
-              href="/writing"
-              linkLabel="All posts"
-            />
-          </Reveal>
-          <Reveal>
-            <PostList>
-              {posts.map((post, i) => (
-                <PostCard key={post.slug} post={post} index={i} />
-              ))}
-            </PostList>
-          </Reveal>
-        </Container>
-      )}
-
-      <Container className="py-16 sm:py-20">
-        <Reveal>
-          <SectionHeading
-            index="02"
-            title="What I'm into"
-            href="/music"
-            linkLabel="All music"
-          />
-        </Reveal>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {recs.map((rec, i) => (
-            <Reveal key={rec.title} className="h-full" delay={i * 0.05}>
-              <RecCard rec={rec} />
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </>
+  const posts: PostMeta[] = full.map(({ content: _content, ...meta }) => meta);
+  const bodies: Record<string, React.ReactNode> = Object.fromEntries(
+    full.map((post) => [post.slug, <MDXRemote key={post.slug} source={post.content} />]),
   );
+
+  const tabs: Tab[] = [
+    { id: "music", label: "music", content: <MusicPane /> },
+    { id: "writing", label: "writing", content: <WritingPane posts={posts} bodies={bodies} /> },
+    { id: "resume", label: "resume", content: <ResumePane /> },
+  ];
+
+  return <Shell tabs={tabs} />;
 }
