@@ -3,7 +3,7 @@
 
 /* ── Design tokens — a sheet of paper ─────────────────────────────────────── */
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-paper: #f4f1ea; /* the sheet */
   --color-paper-2: #efeadf; /* the viewer window, a touch deeper */
@@ -27,8 +27,8 @@
     height: 100%;
   }
   body {
-    height: 100%;
-    overflow: hidden; /* the page never scrolls; only the viewer window does */
+    min-height: 100%;
+    /* Desktop never scrolls (enforced on the shell); mobile may. */
     background-color: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);

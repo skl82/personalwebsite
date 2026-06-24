@@ -13,9 +13,8 @@ export const site = {
     "Personal site of Your Name — music, writing, and the occasional experiment.", // REPLACE
 
   // The three layered hero portraits (top → middle → bottom of the stack).
-  // Swap these for real photos: drop files in /public and point here, e.g.
-  // ["/me-1.jpg", "/me-2.jpg", "/me-3.jpg"].
-  photos: ["/portrait-1.svg", "/portrait-2.svg", "/portrait-3.svg"],
+  // Files live in /public. Cropped to 4:5 and rounded automatically.
+  photos: ["/me-1.jpeg", "/me-2.jpg", "/me-3.jpg"],
 
   // Shown in the "resume" panel.
   resume: {

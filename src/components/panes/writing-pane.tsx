@@ -35,7 +35,7 @@ export function WritingPane({
           {formatDate(current.date)} · {current.readingTime}
         </p>
 
-        <div className="prose prose-sm prose-neutral mt-6 max-w-none prose-headings:font-medium prose-headings:text-ink prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-ink prose-blockquote:border-l-accent prose-blockquote:not-italic prose-code:text-accent prose-code:before:content-none prose-code:after:content-none">
+        <div className="prose prose-sm prose-neutral mt-6 max-w-none prose-headings:font-bold prose-headings:text-ink prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-ink prose-blockquote:border-l-accent prose-blockquote:not-italic prose-code:text-accent prose-code:before:content-none prose-code:after:content-none">
           {bodies[current.slug]}
         </div>
       </article>

@@ -40,61 +40,61 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
   const activeTab = tabs.find((t) => t.id === active) ?? null;
 
   return (
-    <div className="relative z-10 mx-auto flex h-dvh w-full max-w-6xl flex-col gap-8 px-6 py-10 sm:px-10 md:flex-row md:gap-16 md:py-0">
-      {/* LEFT — name + vertical nav */}
-      <aside className="flex shrink-0 flex-col md:h-dvh md:justify-center md:py-16">
-        <button onClick={() => go(null)} className="text-left">
-          <h1 className="text-3xl font-medium tracking-tight text-ink sm:text-4xl">
-            {site.name}
-          </h1>
-          {site.tagline && (
-            <p className="mt-1.5 text-sm text-muted">{site.tagline}</p>
+    <div className="relative z-10 flex min-h-dvh w-full flex-col md:h-dvh md:flex-row md:overflow-hidden">
+      {/* LEFT HALF — name + nav, centered */}
+      <div className="flex flex-1 items-center justify-center px-8 py-14 md:w-1/2 md:py-0">
+        <div className="flex flex-col items-start">
+          <button onClick={() => go(null)} className="text-left">
+            <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+              {site.name}
+            </h1>
+          </button>
+
+          <nav className="mt-8 flex flex-col items-start gap-3 sm:mt-10 sm:gap-4">
+            {tabs.map((t) => {
+              const on = t.id === active;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => go(on ? null : t.id)}
+                  aria-current={on ? "true" : undefined}
+                  className="group relative text-lg text-muted transition-colors hover:text-ink sm:text-xl"
+                >
+                  {/* active/hover marker sits in the left gutter — never shifts the label */}
+                  <span
+                    className={cn(
+                      "absolute top-1/2 right-full mr-3 hidden h-px -translate-y-1/2 transition-all duration-300 md:block",
+                      on
+                        ? "w-6 bg-accent opacity-100"
+                        : "w-4 bg-ink opacity-0 group-hover:opacity-100",
+                    )}
+                  />
+                  <span className={on ? "text-ink" : undefined}>{t.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {socials.length > 0 && (
+            <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted sm:mt-14">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="link"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           )}
-        </button>
+        </div>
+      </div>
 
-        <nav className="mt-8 flex flex-col items-start gap-2.5 sm:mt-12 sm:gap-3.5">
-          {tabs.map((t) => {
-            const on = t.id === active;
-            return (
-              <button
-                key={t.id}
-                onClick={() => go(on ? null : t.id)}
-                aria-current={on ? "true" : undefined}
-                className="group flex items-center gap-3 text-xl text-muted transition-colors hover:text-ink sm:text-2xl"
-              >
-                <span
-                  className={cn(
-                    "h-px transition-all duration-300",
-                    on
-                      ? "w-9 bg-accent"
-                      : "w-4 bg-line group-hover:w-7 group-hover:bg-ink",
-                  )}
-                />
-                <span className={on ? "text-ink" : undefined}>{t.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-
-        {socials.length > 0 && (
-          <div className="mt-10 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted sm:mt-16">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="link"
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-        )}
-      </aside>
-
-      {/* RIGHT — photo or viewer window */}
-      <section className="flex min-h-0 flex-1 items-center justify-center md:h-dvh">
+      {/* RIGHT HALF — photo or viewer window, centered */}
+      <div className="flex flex-1 items-center justify-center px-8 pb-14 md:w-1/2 md:pb-0">
         <AnimatePresence mode="wait">
           {activeTab ? (
             <motion.div
@@ -121,7 +121,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
             </motion.div>
           )}
         </AnimatePresence>
-      </section>
+      </div>
     </div>
   );
 }
