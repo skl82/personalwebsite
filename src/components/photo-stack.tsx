@@ -31,7 +31,7 @@ export function PhotoStack() {
 
   return (
     <div
-      className="relative [transform:rotate(-1.5deg)]"
+      className="relative [transform:rotate(1.5deg)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       style={{
