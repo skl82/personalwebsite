@@ -2,6 +2,26 @@ import Image from "next/image";
 import { bands, releases, recommendations, type Rec } from "@/lib/music";
 import { SpotifyEmbed } from "@/components/spotify-embed";
 
+// Instagram glyph — lucide dropped brand icons, so we inline it.
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={className}
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
 export function MusicPane() {
   return (
     <div className="space-y-10">
@@ -13,7 +33,7 @@ export function MusicPane() {
         </h2>
         <ul className="border-t border-line">
           {bands.map((band) => (
-            <li key={band.name} className="border-b border-line py-4">
+            <li key={band.name} className="relative border-b border-line py-4">
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="text-lg text-ink">
                   {band.link ? (
@@ -39,9 +59,22 @@ export function MusicPane() {
                 )}
               </div>
               {band.description && (
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                <p className="mt-1.5 max-w-[calc(100%-2rem)] text-sm leading-relaxed text-muted">
                   {band.description}
                 </p>
+              )}
+
+              {/* Instagram — bottom-right, greyed until hovered. */}
+              {band.instagram && (
+                <a
+                  href={band.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${band.name} on Instagram`}
+                  className="absolute bottom-4 right-0 text-faint transition-colors hover:text-accent"
+                >
+                  <InstagramIcon className="h-4 w-4" />
+                </a>
               )}
             </li>
           ))}
@@ -51,7 +84,7 @@ export function MusicPane() {
       {/* Releases */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
-          made by me and friends
+          made by friends and I
           <span className="h-px flex-1 bg-line" />
         </h2>
         <div className="space-y-6">

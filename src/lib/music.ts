@@ -18,6 +18,7 @@ export type Band = {
   years?: string; // "2021–present", "2023", …
   description?: string;
   link?: string; // optional — bandcamp, instagram, website, spotify artist page
+  instagram?: string; // the band's instagram URL — shows a hover icon, bottom-right
 };
 
 export type Release = {
@@ -42,24 +43,35 @@ export type Rec = {
 export const bands: Band[] = [
   {
     name: "araujia", // REPLACE
-    role: "guitar / songwriting",
-    years: "2021–present",
-    description: "my main band — dark, loud, and a little romantic.",
+    role: "lead guitar/songwriting",
+    years: "2022 – present",
+    description: "gazes into the metallic void.",
     link: "", // REPLACE — e.g. spotify artist, instagram, or website
+    instagram: "https://www.instagram.com/_araujia_/", // REPLACE — the band's instagram URL
+  },
+  {
+    name: "smite", // REPLACE — the act's name
+    role: "guitar", // REPLACE — e.g. "drums", "vocals / bass"
+    years: "Jan. 2026 - May 2026", // REPLACE — e.g. "2026–present" (or leave "" to hide)
+    description: "georgetown we (were) here, to spread metal cheer.", // REPLACE — a one-line description (or leave "" to hide)
+    link: "", // REPLACE — spotify/instagram/website (or leave "" to hide)
+    instagram: "https://www.instagram.com/smitetheband/", // REPLACE — the band's instagram URL
   },
   {
     name: "hieroglyph", // REPLACE
     role: "guitar",
-    years: "2025–present",
+    years: "Sept. 2025 – Dec. 2025",
     description: "a fun sidequest into power pop.",
     link: "",
+    instagram: "https://www.instagram.com/hieroglyph_band/", // REPLACE — the band's instagram URL
   },
   {
     name: "no one and the elses", // REPLACE
     role: "lead guitar",
-    years: "2026",
-    description: "studio project — see the release below.",
+    years: "Sept. 2024 - May 2025",
+    description: "known for 'avocado girl' and others.",
     link: "",
+    instagram: "https://www.instagram.com/nooneandtheelses/", // REPLACE — the band's instagram URL
   },
 ];
 
@@ -68,19 +80,19 @@ export const releases: Release[] = [
     title: "desire machine - araujia",
     year: "2025",
     spotifyUrl: "https://open.spotify.com/album/17uvr925n9F4KgUBsHJIhj?si=qc7E3us7R16SOHnuK2sicQ", // REPLACE — paste your Spotify track/album link here
-    note: "my main band's first EP",
+    note: "",
   },
   {
     title: "(the) hieroglyph - hieroglyph",
     year: "2026",
     spotifyUrl: "https://open.spotify.com/album/23tM4H8MKLl3DA9l2dtwy1?si=ZnWlTNWMQSuKO9reRtlEBA", // REPLACE
-    note: "a fun sidequest into power pop",
+    note: "",
   },
   {
     title: "n.o.a.t.e - no one and the elses",
     year: "2026",
     spotifyUrl: "https://open.spotify.com/album/3akWSmvvGyNq6LdKjXpjfa?si=6divXhhZQMi_5Sa-YTJSnQ", // REPLACE — paste your Spotify track/album link here
-    note: "lead guitar",
+    note: "",
   },
 ];
 
