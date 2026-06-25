@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -15,13 +15,28 @@ import { cn } from "@/lib/utils";
 export function PhotoStack() {
   const photos = site.photos.slice(0, 3);
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  // Gentle auto-drift: slowly breathe through each facet on its own, so the
+  // hero feels alive before anyone touches it. Pauses while the pointer is over
+  // the photos (manual control wins) and respects reduced-motion preferences.
+  useEffect(() => {
+    if (paused || reduceMotion) return;
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % photos.length);
+    }, 3800);
+    return () => clearInterval(id);
+  }, [paused, reduceMotion, photos.length]);
 
   return (
     <div
       className="relative [transform:rotate(-1.5deg)]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
       style={{
-        width: "clamp(300px, 40vw, 440px)",
-        height: "clamp(380px, 72vh, 620px)",
+        width: "clamp(320px, 46vw, 540px)",
+        height: "clamp(440px, 82vh, 720px)",
       }}
     >
       <div className="flex h-full w-full gap-1.5">
@@ -38,13 +53,14 @@ export function PhotoStack() {
               className="group relative h-full min-w-0 overflow-hidden ring-[3px] ring-paper shadow-[0_24px_60px_-18px_rgba(40,33,20,0.5)] focus:outline-none"
               style={{ flexBasis: 0 }}
               animate={{ flexGrow: on ? 3.4 : 1 }}
-              transition={{ type: "spring", stiffness: 210, damping: 26 }}
+              transition={{ type: "spring", stiffness: 160, damping: 28 }}
             >
               <Image
                 src={src}
                 alt={`portrait ${i + 1}`}
                 fill
-                sizes="(max-width: 768px) 60vw, 440px"
+                sizes="(max-width: 768px) 60vw, 540px"
+                quality={90}
                 priority={i === 0}
                 className={cn(
                   "object-cover transition-[filter,transform] duration-500 ease-out",
@@ -62,7 +78,8 @@ export function PhotoStack() {
                 )}
               />
 
-              {/* Editorial index marker — blends so it reads on any photo. */}
+              {/* Editorial index marker — blends so it reads on any photo.
+                  Sits parallel to the photo's (tilted) bottom edge. */}
               <span className="absolute bottom-3 left-3 text-xs font-bold text-paper mix-blend-difference">
                 {String(i + 1).padStart(2, "0")}
               </span>
