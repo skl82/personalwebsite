@@ -6,9 +6,9 @@
 
 export const site = {
   name: "sebastian larsen", // REPLACE — sits above the nav, slightly larger
-  tagline: "musician · writer · builder", // REPLACE — small line under the name
-  email: "you@example.com", // REPLACE
-  url: "https://example.com", // REPLACE — final domain (SEO / OpenGraph)
+  tagline: "student · musician · builder", // REPLACE — small line under the name
+  email: "", // REPLACE
+  url: "https://sebastianlarsen.xyz", // REPLACE — final domain (SEO / OpenGraph)
   description:
     "Personal site of Your Name — music, writing, and the occasional experiment.", // REPLACE
 
