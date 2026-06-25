@@ -1,6 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Shell, type Tab } from "@/components/shell";
 import { MusicPane } from "@/components/panes/music-pane";
+import { ReadingPane } from "@/components/panes/reading-pane";
 import { WritingPane } from "@/components/panes/writing-pane";
 import { ProjectsPane } from "@/components/panes/projects-pane";
 import { ResumePane } from "@/components/panes/resume-pane";
@@ -21,6 +22,7 @@ export default function Home() {
 
   const tabs: Tab[] = [
     { id: "music", label: "music", content: <MusicPane /> },
+    { id: "reading", label: "reading", content: <ReadingPane /> },
     { id: "writing", label: "writing", content: <WritingPane posts={posts} bodies={bodies} /> },
     { id: "projects", label: "projects", content: <ProjectsPane /> },
     { id: "resume", label: "resume", content: <ResumePane /> },
