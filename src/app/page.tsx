@@ -1,4 +1,5 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { Shell, type Tab } from "@/components/shell";
 import { MusicPane } from "@/components/panes/music-pane";
 import { ReadingPane } from "@/components/panes/reading-pane";
@@ -6,6 +7,17 @@ import { WritingPane } from "@/components/panes/writing-pane";
 import { ProjectsPane } from "@/components/panes/projects-pane";
 import { getPost, getPostSlugs, type Post, type PostMeta } from "@/lib/posts";
 import { site } from "@/lib/site";
+
+// MDX component overrides: external links (footnotes, citations, inline links)
+// open in a new tab; in-page anchors (footnote refs/backrefs) stay put.
+const mdxComponents = {
+  a: ({ href = "", ...props }: React.ComponentProps<"a">) =>
+    /^https?:\/\//.test(href) ? (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...props} />
+    ) : (
+      <a href={href} {...props} />
+    ),
+};
 
 export default function Home() {
   // Load posts (newest first) and pre-render their MDX bodies on the server,
@@ -17,7 +29,16 @@ export default function Home() {
 
   const posts: PostMeta[] = full.map(({ content: _content, ...meta }) => meta);
   const bodies: Record<string, React.ReactNode> = Object.fromEntries(
-    full.map((post) => [post.slug, <MDXRemote key={post.slug} source={post.content} />]),
+    full.map((post) => [
+      post.slug,
+      // remark-gfm enables footnotes, tables, strikethrough, etc. in posts.
+      <MDXRemote
+        key={post.slug}
+        source={post.content}
+        options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+        components={mdxComponents}
+      />,
+    ]),
   );
 
   const tabs: Tab[] = [

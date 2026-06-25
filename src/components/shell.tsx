@@ -33,7 +33,9 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
   // without ever navigating to a new page or tab.
   useEffect(() => {
     const sync = () => {
-      const h = window.location.hash.replace("#", "");
+      // First hash segment is the tab; anything after (e.g. #writing/<slug>)
+      // is an in-pane sub-route owned by that pane.
+      const h = window.location.hash.replace("#", "").split("/")[0];
       setActive(tabs.some((t) => t.id === h) ? h : null);
     };
     sync();
