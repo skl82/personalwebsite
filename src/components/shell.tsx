@@ -54,7 +54,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
   const activeTab = tabs.find((t) => t.id === active) ?? null;
 
   return (
-    <div className="relative z-10 flex h-dvh w-full flex-col overflow-hidden md:flex-row">
+    <div className="relative z-10 flex h-dvh w-full flex-col-reverse overflow-hidden md:flex-row">
       {/* LEFT HALF — name + nav, centered */}
       <div className="flex flex-1 items-center justify-center px-8 py-14 md:w-1/2 md:py-0">
         <div className="flex flex-col items-start">
@@ -128,8 +128,10 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
         <div
           inert={activeTab ? true : undefined}
           className={cn(
-            "absolute inset-0 flex items-center justify-center px-8 pb-14 transition-opacity duration-200 ease-in-out md:pb-0",
-            activeTab ? "pointer-events-none opacity-0" : "opacity-100",
+            "absolute inset-0 flex items-center justify-center px-8 pb-14 opacity-100 transition-opacity duration-200 ease-in-out md:pb-0",
+            // On desktop the hero cross-fades with the active pane. On mobile the
+            // pane is a full-screen overlay, so the hero simply stays put behind it.
+            activeTab && "md:pointer-events-none md:opacity-0",
           )}
         >
           <PhotoStack />
@@ -145,11 +147,24 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                 key={t.id}
                 inert={on ? undefined : true}
                 className={cn(
-                  "absolute inset-0 flex items-center justify-center px-8 pb-14 transition-opacity duration-200 ease-in-out md:pb-0",
+                  // Mobile: a full-screen fixed overlay that floats above the
+                  // hero + nav. Desktop (md+): an absolute pane within the right
+                  // half that cross-fades with the hero — unchanged.
+                  "flex items-center justify-center transition-opacity duration-200 ease-in-out",
+                  "fixed inset-0 z-50 p-4 md:absolute md:z-auto md:p-0 md:px-8",
                   on ? "opacity-100" : "pointer-events-none opacity-0",
                 )}
               >
-                <div className="h-full max-h-[min(80vh,660px)] w-full max-w-xl">
+                {/* Mobile-only scrim: dims the page and closes the overlay when
+                    tapped outside the window. Hidden on desktop. */}
+                <button
+                  type="button"
+                  aria-label="close"
+                  tabIndex={-1}
+                  onClick={() => go(null)}
+                  className="absolute inset-0 -z-10 cursor-default bg-ink/40 backdrop-blur-[2px] md:hidden"
+                />
+                <div className="h-full max-h-[85vh] w-full max-w-xl md:max-h-[min(80vh,660px)]">
                   <ViewerWindow
                     title={t.label}
                     active={on}

@@ -31,13 +31,15 @@ export function PhotoStack() {
 
   return (
     <div
-      className="relative [transform:rotate(1.5deg)]"
+      className={cn(
+        "relative [transform:rotate(1.5deg)]",
+        // Mobile: a compact triptych that fits the top of the stacked layout.
+        "[width:clamp(220px,72vw,360px)] [height:clamp(280px,40vh,440px)]",
+        // Desktop (md+): the original full-bleed dimensions, unchanged.
+        "md:[width:clamp(320px,46vw,540px)] md:[height:clamp(440px,82vh,720px)]",
+      )}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      style={{
-        width: "clamp(320px, 46vw, 540px)",
-        height: "clamp(440px, 82vh, 720px)",
-      }}
     >
       <div className="flex h-full w-full gap-1.5">
         {photos.map((src, i) => {
