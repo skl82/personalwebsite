@@ -52,7 +52,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
   const activeTab = tabs.find((t) => t.id === active) ?? null;
 
   return (
-    <div className="relative z-10 flex min-h-dvh w-full flex-col md:h-dvh md:flex-row md:overflow-hidden">
+    <div className="relative z-10 flex h-dvh w-full flex-col overflow-hidden md:flex-row">
       {/* Off-screen: warms the Spotify players at page load (see component). */}
       <SpotifyPreload />
       {/* LEFT HALF — name + nav, centered */}
@@ -117,29 +117,33 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
         </div>
       </div>
 
-      {/* RIGHT HALF — photo or viewer window, centered */}
-      <div className="flex flex-1 items-center justify-center px-8 pb-14 md:w-1/2 md:pb-0">
-        <AnimatePresence mode="wait">
+      {/* RIGHT HALF — photo or viewer window. The two are absolutely stacked
+          and cross-fade in place, so switching never lags or jumps a corner. */}
+      <div className="relative flex-1 md:w-1/2">
+        <AnimatePresence>
           {activeTab ? (
             <motion.div
               key={activeTab.id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-              className="h-full max-h-[min(80vh,660px)] w-full max-w-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute inset-0 flex items-center justify-center px-8 pb-14 md:pb-0"
             >
-              <ViewerWindow title={activeTab.label} onClose={() => go(null)}>
-                {activeTab.content}
-              </ViewerWindow>
+              <div className="h-full max-h-[min(80vh,660px)] w-full max-w-xl">
+                <ViewerWindow title={activeTab.label} onClose={() => go(null)}>
+                  {activeTab.content}
+                </ViewerWindow>
+              </div>
             </motion.div>
           ) : (
             <motion.div
               key="photo"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute inset-0 flex items-center justify-center px-8 pb-14 md:pb-0"
             >
               <PhotoStack />
             </motion.div>

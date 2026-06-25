@@ -27,8 +27,11 @@
     height: 100%;
   }
   body {
-    min-height: 100%;
-    /* Desktop never scrolls (enforced on the shell); mobile may. */
+    height: 100%;
+    /* The main page never scrolls — only the viewer window does (its own
+       overflow). overscroll-behavior kills rubber-band/bounce too. */
+    overflow: hidden;
+    overscroll-behavior: none;
     background-color: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
