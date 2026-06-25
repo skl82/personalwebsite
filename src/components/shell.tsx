@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PhotoStack } from "@/components/photo-stack";
-import { SpotifyPreload } from "@/components/spotify-preload";
 import { ViewerWindow } from "@/components/viewer-window";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -53,8 +51,6 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
 
   return (
     <div className="relative z-10 flex h-dvh w-full flex-col overflow-hidden md:flex-row">
-      {/* Off-screen: warms the Spotify players at page load (see component). */}
-      <SpotifyPreload />
       {/* LEFT HALF — name + nav, centered */}
       <div className="flex flex-1 items-center justify-center px-8 py-14 md:w-1/2 md:py-0">
         <div className="flex flex-col items-start">
@@ -117,38 +113,46 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
         </div>
       </div>
 
-      {/* RIGHT HALF — photo or viewer window. The two are absolutely stacked
-          and cross-fade in place, so switching never lags or jumps a corner. */}
+      {/* RIGHT HALF — the hero and EVERY content pane are all mounted at once,
+          absolutely stacked, and cross-faded with opacity. Keeping every pane
+          mounted from first paint means heavy embeds (the Spotify players) load
+          on landing and stay warm in the background, so opening a tab is
+          instant — no re-mount, no jerky reload. Inert hides inactive panes
+          from pointer + keyboard without unmounting them. */}
       <div className="relative flex-1 md:w-1/2">
-        <AnimatePresence>
-          {activeTab ? (
-            <motion.div
-              key={activeTab.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="absolute inset-0 flex items-center justify-center px-8 pb-14 md:pb-0"
-            >
-              <div className="h-full max-h-[min(80vh,660px)] w-full max-w-xl">
-                <ViewerWindow title={activeTab.label} onClose={() => go(null)}>
-                  {activeTab.content}
-                </ViewerWindow>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="photo"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              className="absolute inset-0 flex items-center justify-center px-8 pb-14 md:pb-0"
-            >
-              <PhotoStack />
-            </motion.div>
+        {/* hero */}
+        <div
+          inert={activeTab ? true : undefined}
+          className={cn(
+            "absolute inset-0 flex items-center justify-center px-8 pb-14 transition-opacity duration-200 ease-in-out md:pb-0",
+            activeTab ? "pointer-events-none opacity-0" : "opacity-100",
           )}
-        </AnimatePresence>
+        >
+          <PhotoStack />
+        </div>
+
+        {/* one persistent viewer window per content tab */}
+        {tabs
+          .filter((t) => t.content)
+          .map((t) => {
+            const on = t.id === active;
+            return (
+              <div
+                key={t.id}
+                inert={on ? undefined : true}
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center px-8 pb-14 transition-opacity duration-200 ease-in-out md:pb-0",
+                  on ? "opacity-100" : "pointer-events-none opacity-0",
+                )}
+              >
+                <div className="h-full max-h-[min(80vh,660px)] w-full max-w-xl">
+                  <ViewerWindow title={t.label} onClose={() => go(null)}>
+                    {t.content}
+                  </ViewerWindow>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
