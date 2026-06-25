@@ -45,6 +45,10 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
     setActive(id);
     const url = id ? `#${id}` : window.location.pathname;
     window.history.replaceState(null, "", url);
+    // replaceState doesn't emit hashchange, so hash-driven panes (the writing
+    // pane's open-article state) wouldn't otherwise re-sync. Nudge them so
+    // returning to a tab always lands on its top-level view (the article list).
+    window.dispatchEvent(new Event("hashchange"));
   };
 
   const activeTab = tabs.find((t) => t.id === active) ?? null;
@@ -146,7 +150,11 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                 )}
               >
                 <div className="h-full max-h-[min(80vh,660px)] w-full max-w-xl">
-                  <ViewerWindow title={t.label} onClose={() => go(null)}>
+                  <ViewerWindow
+                    title={t.label}
+                    active={on}
+                    onClose={() => go(null)}
+                  >
                     {t.content}
                   </ViewerWindow>
                 </div>
