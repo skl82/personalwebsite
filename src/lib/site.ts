@@ -10,7 +10,7 @@ export const site = {
   email: "", // REPLACE
   url: "https://sebastianlarsen.xyz", // REPLACE — final domain (SEO / OpenGraph)
   description:
-    "Personal site of Your Name — music, writing, and the occasional experiment.", // REPLACE
+    "Sebastian Larsen's Personal Site.", // REPLACE
 
   // The three layered hero portraits (top → middle → bottom of the stack).
   // Files live in /public. Cropped to 4:5 and rounded automatically.
