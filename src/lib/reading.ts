@@ -25,13 +25,11 @@ export const hallOfFame: Book[] = [
     author: "Stanisław Lem",
     cover: "/covers/solaris.jpg",
     year: "1961",
-    note: "first contact as a mirror — the truly alien, and how little of it we'd ever grasp.",
   },
   {
     title: "Skunk Works",
     author: "Ben Rich",
     cover: "/covers/skunk-works.jpg",
     year: "1994",
-    note: "how a tiny team conjured the u-2, the sr-71, and stealth. engineering as guerrilla warfare.",
   },
 ];
