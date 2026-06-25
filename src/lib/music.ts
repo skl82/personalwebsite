@@ -12,6 +12,14 @@
 //    (e.g. 500×500). Leave `cover` as "" for a styled placeholder tile.
 // ─────────────────────────────────────────────────────────────────────────────
 
+export type Band = {
+  name: string;
+  role?: string; // what you do — "guitar", "vocals / songwriting", etc.
+  years?: string; // "2021–present", "2023", …
+  description?: string;
+  link?: string; // optional — bandcamp, instagram, website, spotify artist page
+};
+
 export type Release = {
   title: string;
   year?: string;
@@ -29,6 +37,31 @@ export type Rec = {
   spotifyUrl?: string;
   note?: string;
 };
+
+// BANDS & PROJECTS — the acts you play in or run. A roster, shown up top.
+export const bands: Band[] = [
+  {
+    name: "araujia", // REPLACE
+    role: "guitar / songwriting",
+    years: "2021–present",
+    description: "my main band — dark, loud, and a little romantic.",
+    link: "", // REPLACE — e.g. spotify artist, instagram, or website
+  },
+  {
+    name: "hieroglyph", // REPLACE
+    role: "guitar",
+    years: "2025–present",
+    description: "a fun sidequest into power pop.",
+    link: "",
+  },
+  {
+    name: "no one and the elses", // REPLACE
+    role: "lead guitar",
+    years: "2026",
+    description: "studio project — see the release below.",
+    link: "",
+  },
+];
 
 export const releases: Release[] = [
   {

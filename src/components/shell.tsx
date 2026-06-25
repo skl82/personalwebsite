@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PhotoStack } from "@/components/photo-stack";
+import { SpotifyPreload } from "@/components/spotify-preload";
 import { ViewerWindow } from "@/components/viewer-window";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -41,6 +42,8 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
 
   return (
     <div className="relative z-10 flex min-h-dvh w-full flex-col md:h-dvh md:flex-row md:overflow-hidden">
+      {/* Off-screen: warms the Spotify players at page load (see component). */}
+      <SpotifyPreload />
       {/* LEFT HALF — name + nav, centered */}
       <div className="flex flex-1 items-center justify-center px-8 py-14 md:w-1/2 md:py-0">
         <div className="flex flex-col items-start">

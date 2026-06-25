@@ -1,8 +1,21 @@
 import { projects } from "@/lib/projects";
+import { site } from "@/lib/site";
 
 export function ProjectsPane() {
   return (
-    <ul className="border-t border-line">
+    <div>
+      {site.socials.github && (
+        <a
+          href={site.socials.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link mb-6 inline-block text-sm text-muted"
+        >
+          see more on github ↗
+        </a>
+      )}
+
+      <ul className="border-t border-line">
       {projects.map((p) => (
         <li key={p.title} className="border-b border-line py-5">
           <div className="flex items-baseline justify-between gap-4">
@@ -50,6 +63,7 @@ export function ProjectsPane() {
           )}
         </li>
       ))}
-    </ul>
+      </ul>
+    </div>
   );
 }

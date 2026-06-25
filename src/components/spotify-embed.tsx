@@ -33,7 +33,7 @@ export function SpotifyEmbed({ url, title }: { url: string; title?: string }) {
       className="w-full"
       height={152}
       style={{ border: 0 }}
-      loading="lazy"
+      loading="eager"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     />
   );

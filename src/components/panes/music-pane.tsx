@@ -1,10 +1,53 @@
 import Image from "next/image";
-import { releases, recommendations, type Rec } from "@/lib/music";
+import { bands, releases, recommendations, type Rec } from "@/lib/music";
 import { SpotifyEmbed } from "@/components/spotify-embed";
 
 export function MusicPane() {
   return (
     <div className="space-y-10">
+      {/* Bands & projects */}
+      <section>
+        <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
+          bands &amp; projects
+          <span className="h-px flex-1 bg-line" />
+        </h2>
+        <ul className="border-t border-line">
+          {bands.map((band) => (
+            <li key={band.name} className="border-b border-line py-4">
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="text-lg text-ink">
+                  {band.link ? (
+                    <a
+                      href={band.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-accent"
+                    >
+                      {band.name} ↗
+                    </a>
+                  ) : (
+                    band.name
+                  )}
+                  {band.role && (
+                    <span className="text-muted"> — {band.role}</span>
+                  )}
+                </h3>
+                {band.years && (
+                  <span className="shrink-0 text-xs text-muted">
+                    {band.years}
+                  </span>
+                )}
+              </div>
+              {band.description && (
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                  {band.description}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* Releases */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
