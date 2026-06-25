@@ -21,29 +21,17 @@ export type Book = {
 
 export const hallOfFame: Book[] = [
   {
-    title: "Blood Meridian", // REPLACE
-    author: "Cormac McCarthy",
-    cover: "", // REPLACE — e.g. "/covers/blood-meridian.jpg"
-    year: "2024",
-    note: "the most beautiful sentences about the most terrible things.",
+    title: "Solaris",
+    author: "Stanisław Lem",
+    cover: "/covers/solaris.jpg",
+    year: "1961",
+    note: "first contact as a mirror — the truly alien, and how little of it we'd ever grasp.",
   },
   {
-    title: "The Left Hand of Darkness", // REPLACE
-    author: "Ursula K. Le Guin",
-    cover: "",
-    year: "2023",
-    note: "rewired how i think about people and politics.",
-  },
-  {
-    title: "Gödel, Escher, Bach", // REPLACE
-    author: "Douglas Hofstadter",
-    cover: "",
-    note: "a book that thinks about thinking. took a year, worth a decade.",
-  },
-  {
-    title: "Stoner", // REPLACE
-    author: "John Williams",
-    cover: "",
-    note: "a quiet life rendered so well it breaks your heart.",
+    title: "Skunk Works",
+    author: "Ben Rich",
+    cover: "/covers/skunk-works.jpg",
+    year: "1994",
+    note: "how a tiny team conjured the u-2, the sr-71, and stealth. engineering as guerrilla warfare.",
   },
 ];
