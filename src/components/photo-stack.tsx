@@ -1,55 +1,75 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { site } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
-// Three portraits stacked as overlapping rounded rectangles, cascading down.
-// The arrangement's TOTAL height = 2 * vertical-gap + one box height. To make
-// the photos bigger WITHOUT making the stack taller, the vertical gap between
-// them is kept small (0.60 of a box) so the boxes themselves can grow.
-//   top    → upper-left, on top
-//   middle → down a little + well to the right (overlaps top along the seam)
-//   bottom → down + back to the left (overlaps middle along the seam)
-// Offsets are multiples of --box, so the whole thing scales as one unit.
-// Each print is `--box` wide, 4:5 portrait (height = box * 1.25).
-//   width  = 1.85 * box   |   height = 2.45 * box
-const frames = [
-  { left: "0", top: "0", z: 30 },
-  { left: "calc(var(--box) * 0.85)", top: "calc(var(--box) * 0.60)", z: 20 },
-  { left: "0", top: "calc(var(--box) * 1.20)", z: 10 },
-] as const;
-
+// THREE FACETS — an interactive triptych hero.
+// Three different portraits sit as tall vertical slats. The active one (hover
+// on desktop, tap on mobile) expands to dominate while the other two compress
+// to slivers and desaturate — so the eye reads "one person, three sides."
+// Sharp corners + a paper-print edge + a slight pinned-to-the-page tilt keep it
+// in the paper world of the rest of the site.
 export function PhotoStack() {
   const photos = site.photos.slice(0, 3);
+  const [active, setActive] = useState(0);
 
   return (
     <div
-      className="relative [--box:clamp(180px,min(24vw,35vh),380px)]"
+      className="relative [transform:rotate(-1.5deg)]"
       style={{
-        width: "calc(var(--box) * 1.85)",
-        height: "calc(var(--box) * 2.45)",
+        width: "clamp(300px, 40vw, 440px)",
+        height: "clamp(380px, 72vh, 620px)",
       }}
     >
-      {photos.map((src, i) => (
-        <div
-          key={i}
-          className="absolute overflow-hidden rounded-[24px] ring-[3px] ring-paper shadow-[0_24px_60px_-18px_rgba(40,33,20,0.5)]"
-          style={{
-            left: frames[i].left,
-            top: frames[i].top,
-            zIndex: frames[i].z,
-            width: "var(--box)",
-            height: "calc(var(--box) * 1.25)", // 4:5 portrait
-          }}
-        >
-          <Image
-            src={src}
-            alt={`portrait ${i + 1}`}
-            fill
-            sizes="(max-width: 768px) 70vw, 380px"
-            className="object-cover"
-            priority={i === 0}
-          />
-        </div>
-      ))}
+      <div className="flex h-full w-full gap-1.5">
+        {photos.map((src, i) => {
+          const on = i === active;
+          return (
+            <motion.button
+              key={src}
+              type="button"
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              onClick={() => setActive(i)}
+              aria-label={`portrait ${i + 1}`}
+              className="group relative h-full min-w-0 overflow-hidden ring-[3px] ring-paper shadow-[0_24px_60px_-18px_rgba(40,33,20,0.5)] focus:outline-none"
+              style={{ flexBasis: 0 }}
+              animate={{ flexGrow: on ? 3.4 : 1 }}
+              transition={{ type: "spring", stiffness: 210, damping: 26 }}
+            >
+              <Image
+                src={src}
+                alt={`portrait ${i + 1}`}
+                fill
+                sizes="(max-width: 768px) 60vw, 440px"
+                priority={i === 0}
+                className={cn(
+                  "object-cover transition-[filter,transform] duration-500 ease-out",
+                  on
+                    ? "scale-100 grayscale-0 brightness-100"
+                    : "scale-105 grayscale brightness-90",
+                )}
+              />
+
+              {/* A soft paper veil deepens on the inactive (compressed) slats. */}
+              <span
+                className={cn(
+                  "pointer-events-none absolute inset-0 bg-paper transition-opacity duration-500",
+                  on ? "opacity-0" : "opacity-15",
+                )}
+              />
+
+              {/* Editorial index marker — blends so it reads on any photo. */}
+              <span className="absolute bottom-3 left-3 text-xs font-bold text-paper mix-blend-difference">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </motion.button>
+          );
+        })}
+      </div>
     </div>
   );
 }

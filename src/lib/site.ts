@@ -5,7 +5,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const site = {
-  name: "Your Name", // REPLACE — sits above the nav, slightly larger
+  name: "sebastian larsen", // REPLACE — sits above the nav, slightly larger
   tagline: "musician · writer · builder", // REPLACE — small line under the name
   email: "you@example.com", // REPLACE
   url: "https://example.com", // REPLACE — final domain (SEO / OpenGraph)
