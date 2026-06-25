@@ -29,9 +29,9 @@ export const site = {
 
   // External links. Leave a value as "" to hide it.
   socials: {
-    linkedin: "https://www.linkedin.com/in/your-handle", // REPLACE
-    github: "https://github.com/your-handle", // REPLACE — or ""
-    substack: "https://yourname.substack.com", // REPLACE
+    linkedin: "https://www.linkedin.com/in/sebastian-larsen-5b03b1231/", // REPLACE
+    github: "https://github.com/skl82", // REPLACE — or ""
+    substack: "https://sebastianl3.substack.com", // REPLACE
     spotify: "https://open.spotify.com/artist/your-artist-id", // REPLACE — or ""
   },
 } as const;
