@@ -6,7 +6,10 @@
 //    e.g. https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC
 //    Leave spotifyUrl as "" to show a styled "coming soon" placeholder.
 //
-// 2) RECOMMENDATIONS — stuff you love. Songs and albums, with optional links.
+// 2) RECOMMENDATIONS — stuff you love. Songs and albums shown as cover tiles.
+//    Add cover art by dropping a square image into /public/covers/ and pointing
+//    `cover` at it (e.g. "/covers/in-rainbows.jpg"). Covers look best square
+//    (e.g. 500×500). Leave `cover` as "" for a styled placeholder tile.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type Release = {
@@ -20,6 +23,7 @@ export type Rec = {
   title: string;
   artist: string;
   kind: "song" | "album";
+  cover?: string; // "/covers/your-cover.jpg" (square), or "" for a placeholder
   // Optional links — both are shown if present.
   youtubeUrl?: string;
   spotifyUrl?: string;
