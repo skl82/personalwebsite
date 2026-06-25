@@ -4,8 +4,8 @@ import { MusicPane } from "@/components/panes/music-pane";
 import { ReadingPane } from "@/components/panes/reading-pane";
 import { WritingPane } from "@/components/panes/writing-pane";
 import { ProjectsPane } from "@/components/panes/projects-pane";
-import { ResumePane } from "@/components/panes/resume-pane";
 import { getPost, getPostSlugs, type Post, type PostMeta } from "@/lib/posts";
+import { site } from "@/lib/site";
 
 export default function Home() {
   // Load posts (newest first) and pre-render their MDX bodies on the server,
@@ -25,7 +25,7 @@ export default function Home() {
     { id: "reading", label: "reading", content: <ReadingPane /> },
     { id: "writing", label: "writing", content: <WritingPane posts={posts} bodies={bodies} /> },
     { id: "projects", label: "projects", content: <ProjectsPane /> },
-    { id: "resume", label: "resume", content: <ResumePane /> },
+    { id: "resume", label: "resume", href: site.socials.linkedin },
   ];
 
   return <Shell tabs={tabs} />;
