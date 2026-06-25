@@ -13,15 +13,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "araujiaband.com",
-    year: "2026",
-    description:
-      "my first foray into web development. it started as a digital place to aggregate our band's gigs, but became our online hub with a newsletter, band news, and more.",
-    tags: ["next.js", "typescript", "tailwind", "SQL"],
-    url: "https://araujiaband.com",
-    repo: "", // REPLACE
-  },
-  {
     title: "this website",
     year: "2026",
     description:
@@ -31,11 +22,12 @@ export const projects: Project[] = [
     repo: "", // REPLACE — or remove
   },
   {
-    title: "project three",
-    year: "2024",
+    title: "araujiaband.com",
+    year: "2026",
     description:
-      "another build. an experiment, a tool, a side quest — whatever you're proud of.", // REPLACE
-    tags: ["python"],
-    repo: "https://github.com/your-handle/project-three", // REPLACE — or remove
+      "my first foray into web development. it started as a digital place to aggregate our band's gigs, but became our online hub with a newsletter, band news, and more.",
+    tags: ["react", "vite", "tailwind", "sql"],
+    url: "https://araujiaband.com",
+    repo: "", // REPLACE
   },
 ];
