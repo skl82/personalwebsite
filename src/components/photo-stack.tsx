@@ -33,8 +33,12 @@ export function PhotoStack() {
     <div
       className={cn(
         "relative [transform:rotate(1.5deg)]",
-        // Mobile: a compact triptych that fits the top of the stacked layout.
-        "[width:clamp(220px,72vw,360px)] [height:clamp(280px,40vh,440px)]",
+        // Mobile: a compact triptych that fits the top half of the stacked
+        // layout. Height is measured in dvh (matching the h-dvh shell) and
+        // capped below 50dvh so the centered photo never overflows its half and
+        // clips at the top of the screen. vh here would overshoot, since iOS
+        // Safari's vh is the taller "large" viewport.
+        "[width:clamp(220px,72vw,360px)] [height:clamp(220px,38dvh,400px)]",
         // Desktop (md+): the original full-bleed dimensions, unchanged.
         "md:[width:clamp(320px,46vw,540px)] md:[height:clamp(440px,82vh,720px)]",
       )}
