@@ -5,9 +5,20 @@ import type { NextConfig } from "next";
 // rendering (and losing CDN caching), so script/style use 'unsafe-inline' — safe
 // here because no user input is ever rendered as HTML. The high-value guards are
 // frame-ancestors (clickjacking), object-src 'none', and base-uri 'self'.
+// The dev server (Turbopack) serves plain HTTP and evaluates modules via eval()
+// for hot-reloading. Three production directives break that locally — Safari is
+// strict about all of them, which is why it won't render in dev while Chrome
+// (which exempts localhost) does:
+//   - 'unsafe-eval' is required for the eval()-based HMR runtime.
+//   - HSTS + upgrade-insecure-requests force every localhost request to HTTPS,
+//     which the dev server can't answer. HSTS in particular is cached by the
+//     browser for max-age and is NOT cleared by a normal cache flush.
+// So we add 'unsafe-eval' only in dev, and drop the HTTPS-forcing directives.
+const isDev = process.env.NODE_ENV === "development";
+
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: blob:;
   font-src 'self';
@@ -16,7 +27,7 @@ const cspHeader = `
   base-uri 'self';
   form-action 'self';
   object-src 'none';
-  upgrade-insecure-requests;
+  ${isDev ? "" : "upgrade-insecure-requests;"}
 `;
 
 const securityHeaders = [
@@ -24,8 +35,10 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  // Add `preload` only once every subdomain of the final domain is HTTPS.
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  // HSTS only in production. Add `preload` once every subdomain is HTTPS.
+  ...(isDev
+    ? []
+    : [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" }]),
   // autoplay/encrypted-media/fullscreen left enabled so the Spotify embed works.
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
 ];
