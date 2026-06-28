@@ -6,7 +6,6 @@
 
 export const site = {
   name: "Sebastian Larsen", // REPLACE — sits above the nav, slightly larger
-  tagline: "Student · Musician · Builder", // REPLACE — small line under the name
   email: "", // REPLACE
   url: "https://sebastianlarsen.xyz", // REPLACE — final domain (SEO / OpenGraph)
   description:
