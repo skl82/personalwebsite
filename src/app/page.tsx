@@ -42,11 +42,11 @@ export default function Home() {
   );
 
   const tabs: Tab[] = [
-    { id: "music", label: "music", content: <MusicPane /> },
-    { id: "reading", label: "reading", content: <ReadingPane /> },
-    { id: "writing", label: "writing", content: <WritingPane posts={posts} bodies={bodies} /> },
-    { id: "projects", label: "projects", content: <ProjectsPane /> },
-    { id: "resume", label: "resume", href: site.socials.linkedin },
+    { id: "music", label: "Music", content: <MusicPane /> },
+    { id: "reading", label: "Reading", content: <ReadingPane /> },
+    { id: "writing", label: "Writing", content: <WritingPane posts={posts} bodies={bodies} /> },
+    { id: "projects", label: "Projects", content: <ProjectsPane /> },
+    { id: "resume", label: "Resume", href: site.socials.linkedin },
   ];
 
   return <Shell tabs={tabs} />;

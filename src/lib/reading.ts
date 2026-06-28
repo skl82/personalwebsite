@@ -7,7 +7,7 @@
 // Covers look best at a 2:3 portrait ratio (e.g. 400×600).
 // Leave `cover` as "" to show a styled placeholder tile with the title.
 //
-// Note: the whole site renders lowercase by design; type things normally here.
+// Note: text renders with the casing you type here.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type Book = {

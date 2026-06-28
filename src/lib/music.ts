@@ -42,34 +42,34 @@ export type Rec = {
 // BANDS & PROJECTS — the acts you play in or run. A roster, shown up top.
 export const bands: Band[] = [
   {
-    name: "araujia", // REPLACE
+    name: "Araujia", // REPLACE
     role: "lead guitar/songwriting",
     years: "2022 – present",
-    description: "gazes into the metallic void.",
+    description: "Gazes into the metallic void.",
     link: "", // REPLACE — e.g. spotify artist, instagram, or website
     instagram: "https://www.instagram.com/_araujia_/", // REPLACE — the band's instagram URL
   },
   {
-    name: "smite", // REPLACE — the act's name
+    name: "Smite", // REPLACE — the act's name
     role: "guitar", // REPLACE — e.g. "drums", "vocals / bass"
     years: "Jan. 2026 - May 2026", // REPLACE — e.g. "2026–present" (or leave "" to hide)
-    description: "georgetown we (were) here, to spread metal cheer.", // REPLACE — a one-line description (or leave "" to hide)
+    description: "Georgetown we (were) here, to spread metal cheer.", // REPLACE — a one-line description (or leave "" to hide)
     link: "", // REPLACE — spotify/instagram/website (or leave "" to hide)
     instagram: "https://www.instagram.com/smitetheband/", // REPLACE — the band's instagram URL
   },
   {
-    name: "hieroglyph", // REPLACE
+    name: "Hieroglyph", // REPLACE
     role: "guitar",
     years: "Sept. 2025 – Dec. 2025",
-    description: "a fun sidequest into power pop.",
+    description: "A fun sidequest into power pop.",
     link: "",
     instagram: "https://www.instagram.com/hieroglyph_band/", // REPLACE — the band's instagram URL
   },
   {
-    name: "no one and the elses", // REPLACE
+    name: "No One and the Elses", // REPLACE
     role: "lead guitar",
     years: "Sept. 2024 - May 2025",
-    description: "known for 'avocado girl' and others.",
+    description: "Known for 'avocado girl' and others.",
     link: "",
     instagram: "https://www.instagram.com/nooneandtheelses/", // REPLACE — the band's instagram URL
   },
@@ -77,19 +77,19 @@ export const bands: Band[] = [
 
 export const releases: Release[] = [
   {
-    title: "desire machine - araujia",
+    title: "Desire Machine - Araujia",
     year: "2025",
     spotifyUrl: "https://open.spotify.com/album/17uvr925n9F4KgUBsHJIhj?si=qc7E3us7R16SOHnuK2sicQ", // REPLACE — paste your Spotify track/album link here
     note: "",
   },
   {
-    title: "(the) hieroglyph - hieroglyph",
+    title: "(the) Hieroglyph - Hieroglyph",
     year: "2026",
     spotifyUrl: "https://open.spotify.com/album/23tM4H8MKLl3DA9l2dtwy1?si=ZnWlTNWMQSuKO9reRtlEBA", // REPLACE
     note: "",
   },
   {
-    title: "n.o.a.t.e - no one and the elses",
+    title: "N.O.A.T.E. - No One and the Elses",
     year: "2026",
     spotifyUrl: "https://open.spotify.com/album/3akWSmvvGyNq6LdKjXpjfa?si=6divXhhZQMi_5Sa-YTJSnQ", // REPLACE — paste your Spotify track/album link here
     note: "",

@@ -45,16 +45,14 @@ export function WritingPane({
   // ── Reading a single post ────────────────────────────────────────────────
   if (current) {
     return (
-      // Writing is the one place that keeps real capitalization (the rest of
-      // the site is forced lowercase). `normal-case` lifts that here.
-      <article className="normal-case">
+      <article>
         <button
           type="button"
           onClick={closePost}
           className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
         >
           <ArrowLeft className="h-4 w-4" />
-          all writing
+          All writing
         </button>
 
         <h2 className="text-2xl leading-snug text-ink">{current.title}</h2>
@@ -76,14 +74,14 @@ export function WritingPane({
 
   // ── The list ─────────────────────────────────────────────────────────────
   return (
-    <div className="normal-case">
+    <div>
       <a
         href={site.socials.substack}
         target="_blank"
         rel="noopener noreferrer"
         className="link mb-6 inline-block text-sm text-muted"
       >
-        subscribe on substack ↗
+        Subscribe on substack ↗
       </a>
 
       {posts.length === 0 ? (

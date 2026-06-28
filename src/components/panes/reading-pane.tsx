@@ -7,7 +7,7 @@ export function ReadingPane() {
       {/* Book hall of fame */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
-          book hall of fame
+          Book hall of fame
           <span className="h-px flex-1 bg-line" />
         </h2>
         <ul className="grid grid-cols-2 gap-x-5 gap-y-7">

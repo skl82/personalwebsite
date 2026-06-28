@@ -11,7 +11,7 @@ export function ProjectsPane() {
           rel="noopener noreferrer"
           className="link mb-6 inline-block text-sm text-muted"
         >
-          see more on github ↗
+          See more on github ↗
         </a>
       )}
 
@@ -46,7 +46,7 @@ export function ProjectsPane() {
                   rel="noopener noreferrer"
                   className="link"
                 >
-                  live ↗
+                  Live ↗
                 </a>
               )}
               {p.repo && (
@@ -56,7 +56,7 @@ export function ProjectsPane() {
                   rel="noopener noreferrer"
                   className="link"
                 >
-                  source ↗
+                  Source ↗
                 </a>
               )}
             </div>

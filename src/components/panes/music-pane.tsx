@@ -28,7 +28,7 @@ export function MusicPane() {
       {/* Bands & projects */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
-          bands &amp; projects
+          Bands &amp; projects
           <span className="h-px flex-1 bg-line" />
         </h2>
         <ul className="border-t border-line">
@@ -84,7 +84,7 @@ export function MusicPane() {
       {/* Releases */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
-          made by friends and I
+          Made by friends and I
           <span className="h-px flex-1 bg-line" />
         </h2>
         <div className="space-y-6">
@@ -112,7 +112,7 @@ export function MusicPane() {
       {/* Recommendations */}
       <section>
         <h2 className="mb-4 flex items-center gap-3 text-sm text-muted">
-          on rotation
+          On rotation
           <span className="h-px flex-1 bg-line" />
         </h2>
         <ul className="grid grid-cols-2 gap-x-5 gap-y-7">
@@ -180,7 +180,7 @@ function RecTile({ rec }: { rec: Rec }) {
                 rel="noopener noreferrer"
                 className="link"
               >
-                spotify
+                Spotify
               </a>
             )}
             {rec.youtubeUrl && (
@@ -190,7 +190,7 @@ function RecTile({ rec }: { rec: Rec }) {
                 rel="noopener noreferrer"
                 className="link"
               >
-                youtube
+                YouTube
               </a>
             )}
           </div>

@@ -1,12 +1,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // SITE CONFIG — edit this file to make the site yours.
 // Everything here is placeholder content. Search for "REPLACE".
-// Note: the whole site renders lowercase by design; type things normally here.
+// Note: text renders with the casing you type here.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const site = {
-  name: "sebastian larsen", // REPLACE — sits above the nav, slightly larger
-  tagline: "student · musician · builder", // REPLACE — small line under the name
+  name: "Sebastian Larsen", // REPLACE — sits above the nav, slightly larger
+  tagline: "Student · Musician · Builder", // REPLACE — small line under the name
   email: "", // REPLACE
   url: "https://sebastianlarsen.xyz", // REPLACE — final domain (SEO / OpenGraph)
   description:

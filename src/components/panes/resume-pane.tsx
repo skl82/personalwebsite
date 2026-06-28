@@ -20,7 +20,7 @@ export function ResumePane() {
         rel="noopener noreferrer"
         className="inline-block border border-ink px-4 py-2 text-sm text-ink transition-colors hover:border-accent hover:text-accent"
       >
-        view full résumé on linkedin ↗
+        View full résumé on linkedin ↗
       </a>
     </div>
   );
