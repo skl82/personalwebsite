@@ -12,7 +12,11 @@ import { cn } from "@/lib/utils";
 // to slivers and desaturate — so the eye reads "one person, three sides."
 // Sharp corners + a paper-print edge + a slight pinned-to-the-page tilt keep it
 // in the paper world of the rest of the site.
-export function PhotoStack() {
+export function PhotoStack({
+  onActiveChange,
+}: {
+  onActiveChange?: (index: number) => void;
+}) {
   const photos = site.photos.slice(0, 3);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -28,6 +32,11 @@ export function PhotoStack() {
     }, 3800);
     return () => clearInterval(id);
   }, [paused, reduceMotion, photos.length]);
+
+  // Report the active facet up so the name can take on its color.
+  useEffect(() => {
+    onActiveChange?.(active);
+  }, [active, onActiveChange]);
 
   return (
     <div

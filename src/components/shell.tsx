@@ -26,6 +26,8 @@ function LinkedInLogo({ className }: { className?: string }) {
 
 export function Shell({ tabs }: { tabs: Tab[] }) {
   const [active, setActive] = useState<string | null>(null);
+  // Which hero facet is currently active — drives the first-name color.
+  const [heroIndex, setHeroIndex] = useState(0);
 
   // Reflect the active panel in the URL hash (shareable / refresh-safe),
   // without ever navigating to a new page or tab.
@@ -53,6 +55,11 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
 
   const activeTab = tabs.find((t) => t.id === active) ?? null;
 
+  // First name takes on the active hero photo's accent (site.heroAccents),
+  // cross-fading as the photo stack drifts. Surname stays ink.
+  const [firstName, ...lastName] = site.name.split(" ");
+  const heroColor = site.heroAccents?.[heroIndex];
+
   return (
     <div className="relative z-10 flex h-dvh w-full flex-col-reverse overflow-hidden md:flex-row">
       {/* LEFT HALF — name + nav, centered */}
@@ -64,7 +71,13 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
         <div className="flex flex-col items-start">
           <button onClick={() => go(null)} className="text-left">
             <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-              {site.name}
+              <span
+                className="transition-colors duration-700 ease-out"
+                style={{ color: heroColor }}
+              >
+                {firstName}
+              </span>
+              {lastName.length > 0 && ` ${lastName.join(" ")}`}
             </h1>
           </button>
 
@@ -140,7 +153,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
             activeTab && "md:pointer-events-none md:opacity-0",
           )}
         >
-          <PhotoStack />
+          <PhotoStack onActiveChange={setHeroIndex} />
         </div>
 
         {/* one persistent viewer window per content tab */}

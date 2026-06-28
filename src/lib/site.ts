@@ -15,6 +15,11 @@ export const site = {
   // Files live in /public. Cropped to 4:5 and rounded automatically.
   photos: ["/me-1.jpeg", "/me-2.jpg", "/me-3.jpg"],
 
+  // First-name accent per hero photo (same order as `photos`): purple for the
+  // presentation backdrop, red for the concert's stage light, blue for the
+  // mountains. Tuned to a vivid tone that stays legible on the cream background.
+  heroAccents: ["#9027a5", "#a52736", "#275ba5"],
+
   // Shown in the "resume" panel.
   resume: {
     blurb:
