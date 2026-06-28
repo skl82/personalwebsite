@@ -79,6 +79,25 @@
   }
 }
 
+/* ── Mobile: flat beige ───────────────────────────────────────────────────
+   iOS tints the safe-area strips (status bar, area behind the floating
+   toolbar) with themeColor — a flat color that can't replicate the page's
+   textured + vignetted background, so the strips never match the texture. The
+   fix: one flat beige for everything. This background MUST stay equal to the
+   themeColor in layout.tsx (#e0d9c8). On mobile we drop the texture so page +
+   safe-area bars read as a single seamless hue. Unlayered so it overrides the
+   layered body background. Desktop (≥ 768px) keeps the full texture, untouched. */
+@media (width < 768px) {
+  html,
+  body {
+    background-color: #e0d9c8;
+  }
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
 /* ── Utilities ──────────────────────────────────────────────────────────── */
 @layer utilities {
   .link {

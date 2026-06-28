@@ -56,7 +56,11 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
   return (
     <div className="relative z-10 flex h-dvh w-full flex-col-reverse overflow-hidden md:flex-row">
       {/* LEFT HALF — name + nav, centered */}
-      <div className="flex flex-1 items-center justify-center px-8 py-14 md:w-1/2 md:py-0">
+      {/* On mobile this sits at the bottom (flex-col-reverse), so its lower edge
+          meets the home indicator / floating Safari toolbar. pb gains the
+          safe-area inset to keep the last nav item ("resume") clear of them.
+          md:py-0 restores the desktop layout untouched (and env() is 0 there). */}
+      <div className="flex flex-1 items-center justify-center px-8 pt-14 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:w-1/2 md:py-0">
         <div className="flex flex-col items-start">
           <button onClick={() => go(null)} className="text-left">
             <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
