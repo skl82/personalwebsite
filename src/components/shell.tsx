@@ -97,7 +97,9 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                   >
                     {marker}
                     <span>{t.label}</span>
-                    <span className="inline-flex max-w-0 -translate-x-1 items-center overflow-hidden opacity-0 transition-all duration-300 group-hover:max-w-[3rem] group-hover:translate-x-0 group-hover:opacity-100">
+                    {/* Mobile (no hover): logo + arrow are always shown. Desktop
+                        (md+): hidden by default, slide out on hover. */}
+                    <span className="inline-flex max-w-[3rem] translate-x-0 items-center overflow-hidden opacity-100 transition-all duration-300 md:max-w-0 md:-translate-x-1 md:opacity-0 md:group-hover:max-w-[3rem] md:group-hover:translate-x-0 md:group-hover:opacity-100">
                       <LinkedInLogo className="ml-2 h-4 w-4 shrink-0 text-[#0A66C2]" />
                       <ArrowUpRight className="ml-1 h-3.5 w-3.5 shrink-0" />
                     </span>
@@ -150,13 +152,20 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
               <div
                 key={t.id}
                 inert={on ? undefined : true}
+                // Opacity is set inline (not via a class) so inactive panes are
+                // hidden on the very first paint — before the stylesheet loads.
+                // With a class, the opacity-0 isn't applied until CSS arrives, so
+                // every pane briefly renders stacked in normal flow on load. The
+                // transition-opacity class still animates this inline change, so
+                // the cross-fade is unaffected.
+                style={{ opacity: on ? 1 : 0 }}
                 className={cn(
                   // Mobile: a full-screen fixed overlay that floats above the
                   // hero + nav. Desktop (md+): an absolute pane within the right
                   // half that cross-fades with the hero — unchanged.
                   "flex items-center justify-center transition-opacity duration-200 ease-in-out",
                   "fixed inset-0 z-50 p-4 md:absolute md:z-auto md:p-0 md:px-8",
-                  on ? "opacity-100" : "pointer-events-none opacity-0",
+                  !on && "pointer-events-none",
                 )}
               >
                 {/* Mobile-only scrim: dims the page and closes the overlay when

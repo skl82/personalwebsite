@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# local working notes (Claude's lessons log)
+/tasks/lessons.md
+
 # debug
 npm-debug.log*
 yarn-debug.log*
