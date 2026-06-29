@@ -11,6 +11,10 @@ export const site = {
   description:
     "Sebastian Larsen's Personal Site.", // REPLACE
 
+  // Short bio shown under the name on the home screen. One or two sentences.
+  // Set to "" to hide it.
+  bio: "A Hoya operating in startups, VC, and metal guitar playing; writing and coding on the side.", // REPLACE
+
   // The three layered hero portraits (top → middle → bottom of the stack).
   // Files live in /public. Cropped to 4:5 and rounded automatically.
   photos: ["/me-1.jpeg", "/me-2.jpg", "/me-3.jpg"],

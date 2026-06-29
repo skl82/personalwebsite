@@ -67,9 +67,9 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
           meets the home indicator / floating Safari toolbar. pb gains the
           safe-area inset to keep the last nav item ("resume") clear of them.
           md:py-0 restores the desktop layout untouched (and env() is 0 there). */}
-      <div className="flex flex-1 items-center justify-center px-8 pt-14 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:w-1/2 md:py-0">
-        <div className="flex flex-col items-start">
-          <button onClick={() => go(null)} className="text-left">
+      <div className="flex flex-1 items-center justify-center px-8 pt-14 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:w-1/2 md:py-0">
+        <div className="flex flex-col items-center md:items-start">
+          <button onClick={() => go(null)} className="text-center md:text-left">
             <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
               <span
                 className="transition-colors duration-700 ease-out"
@@ -81,7 +81,19 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
             </h1>
           </button>
 
-          <nav className="mt-8 flex flex-col items-start gap-3 sm:mt-10 sm:gap-4">
+          {site.bio && (
+            <p className="mt-4 max-w-xs text-center text-sm leading-relaxed text-ink/85 sm:max-w-sm md:text-left">
+              {site.bio}
+            </p>
+          )}
+
+          {/* Mobile: a 2×3 spreadsheet-style grid (Music/Reading · Writing/Projects
+              · Contact/Resume) — half the height of a 6-item column, keeping the
+              bio + nav clear of the photo stack. Cells share hairline borders to
+              read as one continuous rectangle: the container draws the top + left
+              edges, each cell draws its right + bottom edge (so no doubling).
+              Desktop (md+): the original borderless vertical list. */}
+          <nav className="mt-8 grid w-full grid-cols-2 border-t-2 border-l-2 border-line sm:mt-10 md:flex md:w-auto md:flex-col md:items-start md:gap-4 md:border-0">
             {tabs.map((t) => {
               const on = t.id === active;
 
@@ -106,7 +118,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                     href={t.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative inline-flex items-center text-lg text-muted transition-colors hover:text-ink sm:text-xl"
+                    className="group relative inline-flex items-center text-lg text-muted transition-colors hover:text-ink max-md:order-1 max-md:flex max-md:items-center max-md:justify-center max-md:border-r-2 max-md:border-b-2 max-md:border-line max-md:py-3 sm:text-xl"
                   >
                     {marker}
                     <span>{t.label}</span>
@@ -125,7 +137,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                   key={t.id}
                   onClick={() => go(on ? null : t.id)}
                   aria-current={on ? "true" : undefined}
-                  className="group relative text-lg text-muted transition-colors hover:text-ink sm:text-xl"
+                  className="group relative text-lg text-muted transition-colors hover:text-ink max-md:flex max-md:items-center max-md:justify-center max-md:border-r-2 max-md:border-b-2 max-md:border-line max-md:py-3 sm:text-xl"
                 >
                   {marker}
                   <span className={on ? "text-ink" : undefined}>{t.label}</span>
