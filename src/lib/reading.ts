@@ -32,4 +32,22 @@ export const hallOfFame: Book[] = [
     cover: "/covers/skunk-works.jpg",
     year: "1994",
   },
+  {
+    title: "The Hunt for Red October",
+    author: "Tom Clancy",
+    cover: "/covers/red-october.jpg",
+    year: "1984",
+  },
+  {
+    title: "When Thunder Rolled",
+    author: "Ed Rasimus",
+    cover: "/covers/when-thunder-rolled-2.jpg",
+    year: "2003",
+  },
+  {
+    title: "His Master's Voice",
+    author: "Stanisław Lem",
+    cover: "/covers/his-masters-voice.jpg",
+    year: "1968",
+  },
 ];
