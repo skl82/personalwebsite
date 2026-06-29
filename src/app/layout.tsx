@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { site } from "@/lib/site";
 
@@ -41,7 +42,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${spaceMono.variable} h-full antialiased`}>
-      <body className="h-full">{children}</body>
+      <body className="h-full">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
