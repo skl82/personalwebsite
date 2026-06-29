@@ -45,7 +45,7 @@ export const bands: Band[] = [
     name: "Araujia", // REPLACE
     role: "lead guitar/songwriting",
     years: "2022 – present",
-    description: "Gazes into the metallic void.",
+    description: "Gazes into the metallic void. At least that's what The Washington Post said.",
     link: "", // REPLACE — e.g. spotify artist, instagram, or website
     instagram: "https://www.instagram.com/_araujia_/", // REPLACE — the band's instagram URL
   },
