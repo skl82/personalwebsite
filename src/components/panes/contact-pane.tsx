@@ -52,6 +52,9 @@ export function ContactPane() {
       email: data.get("email"),
       topic: data.get("topic"),
       message: data.get("message"),
+      // Sets the email's Reply-To to the sender, so hitting "Reply" goes
+      // straight to them instead of the Web3Forms address.
+      replyto: data.get("email"),
       // Shows up as the email subject in the inbox.
       subject: `New ${data.get("topic") || ""} message from ${data.get("name") || "the website"}`,
     };
@@ -89,7 +92,7 @@ export function ContactPane() {
         <span className="h-1.5 w-1.5 bg-accent" />
         <p className="text-lg text-ink">Message sent.</p>
         <p className="text-sm leading-relaxed text-muted">
-          Thanks for reaching out — I&apos;ll get back to you.
+          Thanks for reaching out! I&apos;ll get back to you shortly.
         </p>
         <button
           type="button"
@@ -105,10 +108,14 @@ export function ContactPane() {
   return (
     <div>
       <p className="mb-7 text-sm leading-relaxed text-muted">
-        Want to build something, talk shop, or just say hello? Drop a note.
+        Want to work together, book my band, or just say hello? Drop a note!
       </p>
 
-      <form onSubmit={onSubmit} className="flex flex-col gap-6">
+      {/* pb on mobile: iOS Safari drops a scroll container's own padding-bottom
+          at scroll-end, so the viewer window's py-6 vanishes and the Send button
+          sits flush to the edge. A child's padding is honored, so we add it here.
+          sm:pb-0 lets desktop fall back to the window's padding (no double gap). */}
+      <form onSubmit={onSubmit} className="flex flex-col gap-6 pb-6 sm:pb-0">
         {/* Honeypot — visually hidden, off-screen, never tab-reachable. */}
         <input
           type="text"
