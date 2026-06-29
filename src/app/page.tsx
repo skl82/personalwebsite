@@ -5,6 +5,7 @@ import { MusicPane } from "@/components/panes/music-pane";
 import { ReadingPane } from "@/components/panes/reading-pane";
 import { WritingPane } from "@/components/panes/writing-pane";
 import { ProjectsPane } from "@/components/panes/projects-pane";
+import { ContactPane } from "@/components/panes/contact-pane";
 import { getPost, getPostSlugs, type Post, type PostMeta } from "@/lib/posts";
 import { site } from "@/lib/site";
 
@@ -47,6 +48,7 @@ export default function Home() {
     { id: "writing", label: "Writing", content: <WritingPane posts={posts} bodies={bodies} /> },
     { id: "projects", label: "Projects", content: <ProjectsPane /> },
     { id: "resume", label: "Resume", href: site.socials.linkedin },
+    { id: "contact", label: "Contact Me", content: <ContactPane /> },
   ];
 
   return <Shell tabs={tabs} />;

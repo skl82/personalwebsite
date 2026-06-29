@@ -77,3 +77,32 @@ and set `site.url` for SEO.
 
 ## Review
 (to be filled in as phases complete)
+
+---
+
+# Contact form (Web3Forms) — 2026-06-28
+
+Add a "Contact" tab with a custom form that posts to Web3Forms via client-side
+fetch, matching the flat/mono/paper aesthetic. Keeps everything on-page (no
+native form-action redirect), so only `connect-src` in the CSP changes.
+
+## Tasks
+- [x] Create `src/components/panes/contact-pane.tsx` (client component)
+- [x] Add `connect-src 'self' https://api.web3forms.com;` to CSP in next.config.ts
+- [x] Register the tab in `src/app/page.tsx`
+- [x] Create `.env.local` with placeholder key + document setup
+- [x] `next build` to verify — green, TS clean, `/` still static
+
+## Notes
+- Web3Forms access key is public by design (safe in client bundle).
+- User must sign up at web3forms.com for their real key, then drop it into
+  `.env.local`. Until then the form renders but submits fail clearly.
+
+## Review
+- Form posts via `fetch` (not native submit), so it stays on-page and the only
+  CSP change needed was `connect-src` — `form-action 'self'` untouched.
+- `form-action` doesn't govern fetch, so leaving it strict is correct.
+- Honeypot (`botcheck`) bails silently on success; real validation via `required`.
+- Lint: 1 pre-existing error + 2 pre-existing warnings (writing-pane, posts.ts) —
+  none from contact-pane. Not touched.
+- ONLY remaining manual step: paste real Web3Forms key into `.env.local`.

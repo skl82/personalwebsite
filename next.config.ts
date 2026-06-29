@@ -20,6 +20,7 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
   style-src 'self' 'unsafe-inline';
+  connect-src 'self' https://api.web3forms.com;
   img-src 'self' data: blob:;
   font-src 'self';
   frame-src https://open.spotify.com;
