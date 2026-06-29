@@ -69,7 +69,7 @@ export const bands: Band[] = [
     name: "No One and the Elses", // REPLACE
     role: "lead guitar",
     years: "Sept. 2024 - May 2025",
-    description: "Known for 'avocado girl' and others.",
+    description: "Known for 'Avocado Girl' and others.",
     link: "",
     instagram: "https://www.instagram.com/nooneandtheelses/", // REPLACE — the band's instagram URL
   },
