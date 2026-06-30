@@ -67,7 +67,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
           meets the home indicator / floating Safari toolbar. pb gains the
           safe-area inset to keep the last nav item ("resume") clear of them.
           md:py-0 restores the desktop layout untouched (and env() is 0 there). */}
-      <div className="flex flex-1 items-center justify-center px-8 pt-14 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:w-1/2 md:py-0">
+      <div className="flex flex-1 items-center justify-center px-8 pt-14 pb-[calc(1.5rem+env(safe-area-inset-bottom))] max-[380px]:pt-5 md:w-1/2 md:py-0">
         <div className="flex flex-col items-center md:items-start">
           <button onClick={() => go(null)} className="text-center md:text-left">
             <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
@@ -82,7 +82,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
           </button>
 
           {site.bio && (
-            <p className="mt-4 max-w-xs text-center text-sm leading-relaxed text-ink/85 sm:max-w-sm md:text-left">
+            <p className="mt-4 max-w-xs text-center text-sm leading-relaxed text-ink/85 max-[380px]:mt-3 sm:max-w-sm md:text-left">
               {site.bio}
             </p>
           )}
@@ -93,7 +93,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
               read as one continuous rectangle: the container draws the top + left
               edges, each cell draws its right + bottom edge (so no doubling).
               Desktop (md+): the original borderless vertical list. */}
-          <nav className="mt-8 grid w-full grid-cols-2 border-t-2 border-l-2 border-line sm:mt-10 md:flex md:w-auto md:flex-col md:items-start md:gap-4 md:border-0">
+          <nav className="mt-8 grid w-full grid-cols-2 border-t-2 border-l-2 border-line max-[380px]:mt-5 sm:mt-10 md:flex md:w-auto md:flex-col md:items-start md:gap-4 md:border-0">
             {tabs.map((t) => {
               const on = t.id === active;
 
@@ -118,7 +118,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                     href={t.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative inline-flex items-center text-lg text-muted transition-colors hover:text-ink max-md:order-1 max-md:flex max-md:items-center max-md:justify-center max-md:border-r-2 max-md:border-b-2 max-md:border-line max-md:py-3 sm:text-xl"
+                    className="group relative inline-flex items-center text-lg text-muted transition-colors hover:text-ink max-md:order-1 max-md:flex max-md:items-center max-md:justify-center max-md:border-r-2 max-md:border-b-2 max-md:border-line max-md:py-3 max-[380px]:max-md:py-2 sm:text-xl"
                   >
                     {marker}
                     <span>{t.label}</span>
@@ -137,7 +137,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
                   key={t.id}
                   onClick={() => go(on ? null : t.id)}
                   aria-current={on ? "true" : undefined}
-                  className="group relative text-lg text-muted transition-colors hover:text-ink max-md:flex max-md:items-center max-md:justify-center max-md:border-r-2 max-md:border-b-2 max-md:border-line max-md:py-3 sm:text-xl"
+                  className="group relative text-lg text-muted transition-colors hover:text-ink max-md:flex max-md:items-center max-md:justify-center max-md:border-r-2 max-md:border-b-2 max-md:border-line max-md:py-3 max-[380px]:max-md:py-2 sm:text-xl"
                 >
                   {marker}
                   <span className={on ? "text-ink" : undefined}>{t.label}</span>
@@ -165,7 +165,7 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
             // resolve the latter, which let the photo overflow onto the name
             // under Display Zoom). Desktop (md+): back to the absolute, opacity
             // cross-faded pane, unchanged.
-            "flex flex-1 min-h-0 items-center justify-center px-8 pt-14 pb-0 opacity-100 transition-opacity duration-200 ease-in-out md:absolute md:inset-0 md:pt-0 md:pb-0",
+            "flex flex-1 min-h-0 items-center justify-center px-8 pt-14 pb-0 opacity-100 transition-opacity duration-200 ease-in-out max-[380px]:pt-6 md:absolute md:inset-0 md:pt-0 md:pb-0",
             // On desktop the hero cross-fades with the active pane. On mobile the
             // pane is a full-screen overlay, so the hero simply stays put behind it.
             activeTab && "md:pointer-events-none md:opacity-0",
