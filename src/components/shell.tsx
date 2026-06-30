@@ -154,12 +154,18 @@ export function Shell({ tabs }: { tabs: Tab[] }) {
           on landing and stay warm in the background, so opening a tab is
           instant — no re-mount, no jerky reload. Inert hides inactive panes
           from pointer + keyboard without unmounting them. */}
-      <div className="relative flex-1 md:w-1/2">
+      <div className="relative flex flex-col flex-1 min-h-0 md:block md:w-1/2">
         {/* hero */}
         <div
           inert={activeTab ? true : undefined}
           className={cn(
-            "absolute inset-0 flex items-center justify-center px-8 pt-14 pb-0 opacity-100 transition-opacity duration-200 ease-in-out md:pt-0 md:pb-0",
+            // Mobile: a normal flex child that shrinks as the nav/bio half
+            // claims space — so the carousel's height is set by flexbox, not by
+            // a percentage measured against an absolute box (iOS Safari fails to
+            // resolve the latter, which let the photo overflow onto the name
+            // under Display Zoom). Desktop (md+): back to the absolute, opacity
+            // cross-faded pane, unchanged.
+            "flex flex-1 min-h-0 items-center justify-center px-8 pt-14 pb-0 opacity-100 transition-opacity duration-200 ease-in-out md:absolute md:inset-0 md:pt-0 md:pb-0",
             // On desktop the hero cross-fades with the active pane. On mobile the
             // pane is a full-screen overlay, so the hero simply stays put behind it.
             activeTab && "md:pointer-events-none md:opacity-0",

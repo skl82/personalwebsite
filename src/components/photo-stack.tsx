@@ -42,15 +42,15 @@ export function PhotoStack({
     <div
       className={cn(
         "relative [transform:rotate(1.5deg)]",
-        // Mobile: a compact triptych that fits the top half of the stacked
-        // layout. Height is a dvh clamp (matching the h-dvh shell) but also
-        // capped at 100% of its half via min(): when large accessibility font
-        // sizes make the bio wrap to more lines, the bottom (text) half grows
-        // and steals height from this top half. The min() lets the photo shrink
-        // to fit the space that's left — so growing text scales the carousel
-        // down instead of pushing into it and clipping at the top of the
-        // screen. The half's pt-14 keeps the gap above the photo constant.
-        "[width:clamp(220px,72vw,360px)] [height:min(clamp(220px,38dvh,400px),100%)]",
+        // Mobile: a compact triptych for the top half of the stacked layout.
+        // h-full makes the photo fill the flex space its (now flex-sized) half
+        // leaves it, so when the bio/nav half needs more room — bigger text,
+        // narrower viewport, iOS Display Zoom — the photo shrinks to fit instead
+        // of overflowing onto the name. max-height (a viewport unit, not a
+        // percentage) caps how large it grows on a roomy screen, matching the
+        // old 38dvh feel. Driving the height through flexbox + a vh cap avoids
+        // the percentage-of-an-absolute-box that iOS Safari won't resolve.
+        "[width:clamp(220px,72vw,360px)] max-md:h-full max-md:[max-height:clamp(220px,38dvh,400px)]",
         // Desktop (md+): the original full-bleed dimensions, unchanged.
         "md:[width:clamp(320px,46vw,540px)] md:[height:clamp(440px,82vh,720px)]",
       )}
