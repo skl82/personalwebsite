@@ -1,0 +1,58 @@
+---
+title: "The Claude Health Data Experiment: Report 1"
+date: "2026-07-01"
+summary: "Can Claude discover patterns in my health data and turn them into durable, actionable insights? Let's find out."
+tags: ["ai", "health", "quantified self"]
+---
+
+### Abstract
+
+Over the last month, I’ve been conducting an experiment to evaluate Claude’s usefulness as a health coach. Using Claude Projects, I’ve wired in data from Apple Health, Strava, Notion, and Google Calendar, with the hope of 1) identifying patterns in my fitness, sleep, and general vitals over time, 2) getting snapshot “performance reviews” of each week, and 3) discovering tangible personal improvement strategies. In this lab report, I cover the setup process, my early thoughts on the results, and what I’ve learned along the way.
+
+Historically I have never been a major evangelist for wearables. I consider myself lucky in that I’m relatively “in touch” with my body and my mental state on a given day, and can almost always pinpoint deviations back to something—poor sleep, skipping the gym, etc. I didn’t need an app to tell me how I slept the previous night.
+
+However, last month it dawned on me that the greatest insight from wearables is not in the day-to-day metrics, it’s the trends they generate over time. Perhaps it was just the impact of my first couple weeks in SF, but something clicked. I’m fundamentally an AI optimist when it comes to health and medicine, and I knew the Claude mobile app had an Apple Health integration. The pieces were all starting to come together, and the prospect of molding Claude into a personal health coach suddenly became very exciting and very doable.
+
+Hence, I present **The Claude Health Data Experiment: Report 1**.
+
+### Materials
+
+- Wearable (in my case, an Oura Ring for daily wear and an Apple Watch for fitness, but anything that integrates with Apple Health will work)
+- Claude (mobile app)
+- Claude’s iOS Apple Health integration
+- **Connectors** (external accounts that can be linked to Claude in the “Customize” tab that allow the model to read and write data to those external systems; permissions can be approved automatically, manually, or denied depending on preference)
+    - Strava
+    - Notion
+    - Google Calendar
+
+### The Setup
+
+First, I had to determine the ideal vehicle to package, analyze and present my data. I’ve become relatively facile with Claude Code over the last couple of months, so my first instinct was to build a dashboard—the stuff of vibe-coders’ dreams. But this approach wouldn’t work since 1) Claude’s Apple Health integration is iOS only, not a cloud-based connector like Strava and Notion, and 2) I was hesitant to deploy anything to the web considering the private nature of this data, and preferred to keep this within the Claude ecosystem. I considered building a live artifact in Claude Cowork (a relatively new tool to create artifacts with live-updating data from connectors) but ran into the same Apple Health limitation, because Claude mobile doesn’t have Cowork. After a couple more exploratory turns with Claude, I turned to Projects.
+
+Projects exist on both desktop and mobile Claude platforms, and provide a convenient way to group chats by subject or task. Projects have their own memory and file storage systems, and importantly for my use case, a field to input instructions where I could lay out exactly what I wanted Claude to do (which also meant I could create a new chat in the project and simply prompt Claude to “analyze this week’s data” instead of describing the process anew each time).
+
+Next, I worked with Claude to craft the instructions themselves. The beauty of Claude Projects is that they’ve got full access to the user’s connectors, and “adding in” a connector is as simple as describing how you’d like that connector to be used in the instructions field. As noted above, my goals for this project were to find patterns, review my weekly performance, and discover personal improvement strategies. I could have written these myself, but figured if anyone knew Claude best it was Claude itself, and the model packaged the instructions cohesively while adding some beneficial guardrails to ensure statistical rigor. Getting them into the project was as easy as copy and pasting.
+
+The initial MVP only involved Strava (to handle my running data) and Apple Health (for everything else). A week in, I decided to wire up the Notion MCP to add a mental health dimension. In Notion, I created a “Daily Journal” database and a template for a dated journal entry; to keep it as uniform as possible, I structured each entry as a series of 6 repeated questions, and set up the template to generate a new blank entry each morning. I told Claude that I had set this up, and it gave me updated instructions to put into the project. Notion also played a role as a convenient system of record to improve efficiency and consistency. In addition to creating the daily journal page, I created a “Health Tracker Log” page that Claude could read and write to; every week, it packages the most salient points into what is essentially a journal entry of its own, and references it to be “reminded” of those points in subsequent analyses. Project memory isn’t dependable enough to carry these points week-over-week, so this log acts as the project’s ground-truth document.
+
+Finally, I added the Google Calendar MCP simply to give Claude further context on my schedule. For example, if my sleep data showed a late night, Claude could use Google Calendar to determine whether or not that was because of an event.
+
+On the model side, I am using Opus 4.8 Max for this analysis—since this is not a time-sensitive back and forth conversation, I’m allowing it to reason for a long time (10-15 minutes). I’d advise using a lower reasoning setting depending on your Claude plan limits.
+
+If there’s any meta-level AI takeaway to be had here, it’s that one of the most important paradigmatic shifts in AI relative to other technologies is that you, the user, can *ask Claude for its own best usage practices*. Want to know what the best instruction model or data pipeline for your own use case is? Just ask!
+
+### Results and Insights
+
+I’ve been running this trial for the last 4 weeks; the first two used only Apple Health and Strava data, and last week was the first with the Notion and Google Calendar integrations.
+
+So far, the insights are not novel by any stretch of the imagination. Yet, they’ve actually been quite helpful. I certainly didn’t need Claude Opus 4.8 Max to tell me that, in its expert opinion, I am quicker to frustration after a poor night’s sleep, or that I need to include speed work in my running training if I want to improve my 5k time. *Yeah, thanks*. I went into this project expecting to learn some hidden insight about how my workout times correlate to my sleep quality, or how different bedtimes impact my mood the next day, and haven’t gotten there yet. That may still be coming as the project accumulates more data to draw patterns from, and the project design process itself has certainly made me more attuned to those details than I otherwise would be. Furthermore, the patterns that it’s been flagging so far are not *wrong*, and frankly it’s been interesting enough to see my health data presented in a conversational format that I don’t consider the pattern-finding goal to have been a miss. The weekly performance reviews specifically have been spot-on, but that was the simplest part of this experiment since it involved the smallest, most current pool of data.
+
+However, what’s been most striking about these first couple weeks is the increased accountability I’ve felt toward meeting my stated training goals. The following week after getting that speed work message, I actually went out and *did* the interval speed training I had written in my training plan but had lazily skipped in previous weeks. “Health Coach Claude” seems to have captured the benefits of an accountability buddy, but perhaps to an even more comprehensive degree by ingesting data that spans my sleep, fitness, and mental state. At the end of the week, my numbers don’t lie, and if I skipped something or failed to hit a specific goal, Claude flags it while usually pinpointing a sound corresponding cause. Unlike a Strava goal, I can interact with this feedback, asking follow up questions to understand where exactly I fell short and devising a strategy to improve. It’s like a gym buddy, personal trainer, and life coach rolled into one entity, with a level of context almost no workout partner could have (I suppose a spouse might, but that’s not a concern at this moment).
+
+I’m very happy with this experiment so far and I’m excited to continue. While I went in expecting the novelty of Claude’s insights to be the main benefit, I’m realizing that my AI health coach’s most potent strength might actually be more akin to that of an accountability buddy. It’s already helped steer me on the right path with speed training adherence, and I’m excited to see the other benefits that emerge over the coming weeks. Not to mention, this project has gotten me to journal almost every day, which has always been hit-or-miss for me, so that’s a win on the personal improvement front.
+
+### Next Steps
+
+These first 4 weeks have proven the concept, but have also raised issues with the medium. Opus 4.8 Max takes its time by design, which wouldn’t be a problem if it weren’t for the Claude mobile app’s entirely broken connector permissions system. Despite having all pertinent connector permissions set to “Always Allow,” I constantly have to reauthorize access and am essentially forced to watch the model reason for 10-15 minutes as it parses through the data. It’s more interesting than it sounds, but grew taxing after the first week’s novelty wore off.
+
+Thankfully, there is a solution: Claude Code Routines. Excluding the Apple Health integration, all the relevant data sources are connectors, meaning they can be accessed by Claude Code natively and incorporated into cloud-based routines with fully bypassed permissions, so Claude can work remotely and simply deliver the summary when it’s finished. In my case, Apple Health was simply the vehicle to connect my Oura data to Claude, but Oura offers direct API access to data in their developer portal. My research into implementing this is still ongoing, but it would alleviate the sole pain point I’ve experienced so far. Furthermore, it should still keep everything in the Claude ecosystem, or at the very least not involve any public web deployments. There will be more details to come on this transition in report 2!
