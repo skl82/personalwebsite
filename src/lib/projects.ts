@@ -16,7 +16,7 @@ export const projects: Project[] = [
     title: "This website",
     year: "2026",
     description:
-      "The page you're looking at. Like christmas, with a little more me.", // REPLACE
+      "Like Christmas, with a little more me.",
     tags: ["next.js", "typescript", "tailwind"],
     url: "", // REPLACE — or remove
     repo: "", // REPLACE — or remove

@@ -46,7 +46,7 @@ export function ProjectsPane() {
                   rel="noopener noreferrer"
                   className="link"
                 >
-                  Live ↗
+                  Check it out ↗
                 </a>
               )}
               {p.repo && (

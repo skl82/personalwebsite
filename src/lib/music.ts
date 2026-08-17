@@ -103,7 +103,6 @@ export const recommendations: Rec[] = [
     kind: "album",
     cover: "/covers/are-you-dead-yet.jpg",
     youtubeUrl: "https://www.youtube.com/watch?v=5SgN5lvWZwQ",
-    note: "The greatest metal album ever? Maybe. In my world? Certainly.",
   },
   {
     title: "Clayman",
@@ -139,5 +138,19 @@ export const recommendations: Rec[] = [
     kind: "album",
     cover: "/covers/diorama.jpg",
     youtubeUrl: "https://www.youtube.com/watch?v=Bi9wI-kwNIk",
+  },
+  {
+    title: "Duél",
+    artist: "Jinjer",
+    kind: "album",
+    cover: "/covers/duel.jpg",
+    youtubeUrl: "https://www.youtube.com/watch?v=zcS8nu0S0KA",
+  },
+  {
+    title: "The New Flesh",
+    artist: "Sylosis",
+    kind: "album",
+    cover: "/covers/the-new-flesh.jpg",
+    youtubeUrl: "https://www.youtube.com/watch?v=eFpq1PIB0yk",
   },
 ];

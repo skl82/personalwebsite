@@ -50,4 +50,22 @@ export const hallOfFame: Book[] = [
     cover: "/covers/his-masters-voice.jpg",
     year: "1968",
   },
+  {
+    title: "The Infinity Machine",
+    author: "Sebastian Mallaby",
+    cover: "/covers/infinity-machine.jpg",
+    year: "2026",
+  },
+  {
+    title: "The Odyssey",
+    author: "Homer",
+    cover: "/covers/odyssey.jpg",
+    year: "650 BC",
+  },
+  {
+    title: "Concorde: The Thrilling Account of History's Most Extraordinary Airliner",
+    author: "Mike Bannister",
+    cover: "/covers/concorde.jpg",
+    year: "2022",
+  },
 ];
