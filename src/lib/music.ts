@@ -43,7 +43,7 @@ export type Rec = {
 export const bands: Band[] = [
   {
     name: "Araujia", // REPLACE
-    role: "lead guitar/songwriting",
+    role: "lead guitar/songwriter",
     years: "2022 – present",
     description: "\"Gazes into the metallic void\"; at least, that's what The Washington Post said.",
     link: "", // REPLACE — e.g. spotify artist, instagram, or website
