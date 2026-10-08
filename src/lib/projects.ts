@@ -13,6 +13,14 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Backmonkey",
+    year: "2026",
+    description:
+      "A gamified accountability app centered around protecting a pet monkey's lives, or an optional pledge, by checking in daily. The app can be used solo or with friends for group accountability, and is available for free on the App Store.",
+    tags: ["react native", "expo", "typescript", "sql", "stripe"],
+    url: "https://trybackmonkey.com",
+  },
+  {
     title: "This website",
     year: "2026",
     description:
