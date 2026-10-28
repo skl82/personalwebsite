@@ -1,73 +1,53 @@
-# Personal Website
+# sebastianlarsen.xyz
 
-A fun-but-professional personal site — **bold & modern**, built with Next.js 16,
-TypeScript, Tailwind v4, and Framer Motion. Three tabs: **Music**, **Writing**, and
-a **Resume** link out to LinkedIn.
+My personal website: music, reading, writing, projects, and a way to get in touch. Live at **[sebastianlarsen.xyz](https://www.sebastianlarsen.xyz)**.
 
-## Getting started
+![The homepage: name and bio with a menu of six sections on the left, and a stack of three photos on a textured paper background on the right](docs/screenshot.jpg)
+
+## What's on it
+
+- **Music:** bands I play in, my releases as Spotify embeds, and what I'm listening to.
+- **Reading:** a hall of fame of favorite books.
+- **Writing:** essays written in MDX and rendered on the site. Each one has its own shareable link.
+- **Projects:** things I've built.
+- **Resume:** links out to LinkedIn.
+- **Contact:** a form that sends straight to my inbox.
+
+The whole site is one page. Each section opens in a window over the home screen, the URL hash tracks where you are (`#writing`, `#writing/<essay>`), and the browser's back and forward buttons work as expected. On phones, the menu becomes a grid and sections open full-screen.
+
+## How it's built
+
+| Part | Tools |
+|---|---|
+| Framework | Next.js 16 (App Router), React 19, TypeScript |
+| Styling | Tailwind CSS 4, Space Mono via `next/font` |
+| Writing | MDX files in `content/writing/`, rendered with `next-mdx-remote` and `remark-gfm` |
+| Motion | Framer Motion |
+| Contact form | [Web3Forms](https://web3forms.com) |
+| Hosting | Vercel, with Vercel Analytics |
+
+### Details I cared about
+
+- **Fully static.** Essays are rendered at build time, so the site is prerendered and serves fast with no server work per visit.
+- **Publishing is just a file.** Drop an `.mdx` file with a title, date, summary, and tags into `content/writing/` and it appears, sorted by date, with reading time calculated. A post can link out to Substack instead of rendering on the site.
+- **Security headers.** A strict Content Security Policy only allows the site itself, Spotify embeds, and the contact form's API, and the site can't be framed by other sites. It also sets HSTS and a Permissions-Policy that turns off camera, microphone, and location. See `next.config.ts`.
+- **Smooth and accessible.** Spotify embeds load after the page is idle and hold their space so nothing jumps. The photo animation stops for visitors who prefer reduced motion, and hidden sections are `inert` so keyboard users can't tab into them.
+- **Spam protection without a CAPTCHA.** The contact form uses a hidden honeypot field.
+
+## Run it locally
 
 ```bash
-npm run dev      # http://localhost:3000
-npm run build    # production build
-npm run start    # serve the production build
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-## Make it yours
+The contact form needs `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in `.env.local`. Everything else works without it.
 
-Everything is placeholder content right now. Three files + one folder are all you
-need to touch (search the codebase for `REPLACE`):
-
-| What | Where |
-| --- | --- |
-| Name, tagline, intro, email, social links, nav | `src/lib/site.ts` |
-| Your releases (Spotify) + recommendations grid | `src/lib/music.ts` |
-| Blog posts | `content/writing/*.mdx` |
-
-### Music
-
-- **Your releases**: paste a normal Spotify share link (track / album / artist /
-  playlist) into `releases` in `src/lib/music.ts`. It's auto-converted into an
-  embedded player. Empty links show a styled "coming soon" placeholder.
-- **Recommendations**: add songs/albums to `recommendations`, each with optional
-  YouTube and/or Spotify links.
-
-### Writing
-
-- To publish a post, drop a new `.mdx` file in `content/writing/`. Frontmatter:
-
-  ```mdx
-  ---
-  title: "Post title"
-  date: "2026-06-23"
-  summary: "One-line teaser shown in the list."
-  tags: ["essays"]
-  # Optional: if set, the card links out to Substack instead of an on-site page.
-  # substackUrl: "https://yourname.substack.com/p/slug"
-  ---
-
-  Your markdown / MDX here.
-  ```
-
-- The list at `/writing` is generated automatically (newest first), and each post
-  gets its own themed page at `/writing/[slug]`.
-- Set your Substack URL in `src/lib/site.ts` for the "Subscribe" callout.
-
-### Theme
-
-Colors and fonts are CSS variables in `src/app/globals.css` (the `@theme` block).
-The signature gradient is `--color-accent` → `--color-accent-2` → `--color-accent-3`.
-
-## Deploy
-
-Push to GitHub and import the repo on [Vercel](https://vercel.com) — zero config.
-Set your final domain in `site.url` (`src/lib/site.ts`) for correct SEO/OpenGraph.
-
-## Project structure
+## Project layout
 
 ```
-src/
-  app/                 routes (home, music, writing, writing/[slug])
-  components/          nav, footer, hero, cards, embeds, motion helpers
-  lib/                 site config, music data, MDX post loader, utils
-content/writing/       your .mdx posts
+src/app/          # the single page, layout, and global styles
+src/components/   # shell, photo stack, viewer window, section panes
+src/lib/          # site config and content data: posts loader, music, reading, projects
+content/writing/  # essays as .mdx
 ```
