@@ -33,7 +33,7 @@ export const projects: Project[] = [
     title: "araujiaband.com",
     year: "2026",
     description:
-      "My first foray into web development. It started as a digital place to aggregate our band's gigs, but became our online hub with a newsletter, band news, and more.",
+      "My first foray into \"practical\" web development. It started as a digital place to aggregate our band's gigs, but became our online hub with a newsletter, band news, and more.",
     tags: ["react", "vite", "tailwind", "sql"],
     url: "https://araujiaband.com",
     repo: "", // REPLACE
