@@ -42,8 +42,8 @@ export const projects: Project[] = [
     title: "Monopoly Tracker",
     year: "2025",
     description:
-      "My first-ever personal coding project, built during a big Monopoly phase. A dashboard that replaces the paper money on Monopoly night and keeps track of everyone's cash, properties, houses, and mortgages. It works out rent payments automatically, saves games in the browser so you can pick up where you left off, and covers (nearly) every permutation of the US ruleset.",
-    tags: ["react", "typescript", "vite", "tailwind", "indexeddb"],
+      "My first-ever personal coding project. A dashboard that replaces the paper money on Monopoly night and keeps track of everyone's cash, properties, houses, mortgages, and trades. It works out rent payments automatically, saves games in the browser, and covers (nearly) every permutation of the US ruleset.",
+    tags: ["react", "typescript", "vite", "tailwind", "dexie"],
     url: "https://www.monopolytracker.com",
   },
 ];
