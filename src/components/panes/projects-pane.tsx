@@ -40,10 +40,12 @@ export function ProjectsPane() {
           {(p.url || p.repo) && (
             <div className="mt-2.5 flex gap-4 text-xs text-muted">
               {p.url && (
+                // No noreferrer: these are my own sites, so let their analytics
+                // see visits came from here. noopener still blocks tabnabbing.
                 <a
                   href={p.url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   className="link"
                 >
                   Check it out ↗
