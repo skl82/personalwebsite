@@ -17,7 +17,7 @@ export const projects: Project[] = [
     year: "2026",
     description:
       "A gamified accountability app centered around protecting a pet monkey's lives, or an optional pledge, by checking in daily. The app can be used solo or with friends for group accountability, and is available for free on the App Store.",
-    tags: ["react native", "expo", "typescript", "sql", "stripe"],
+    tags: ["react native", "expo", "typescript", "supabase", "stripe"],
     url: "https://trybackmonkey.com",
   },
   {
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     year: "2026",
     description:
       "My first foray into \"practical\" web development. It started as a digital place to aggregate our band's gigs, but became our online hub with a newsletter, band news, and more.",
-    tags: ["react", "vite", "tailwind", "sql"],
+    tags: ["react", "vite", "tailwind", "supabase"],
     url: "https://araujiaband.com",
     repo: "", // REPLACE
   },
