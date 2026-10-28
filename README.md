@@ -1,4 +1,4 @@
-# sebastianlarsen.xyz
+# Personal Website
 
 My personal website: music, reading, writing, projects, and a way to get in touch. Live at **[sebastianlarsen.xyz](https://www.sebastianlarsen.xyz)**.
 
